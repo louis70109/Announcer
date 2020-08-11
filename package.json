@@ -1,0 +1,31 @@
+{
+  "name": "liff-concat-js",
+  "version": "1.0.0",
+  "description": "This is a liff concat test project",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./index.js localhost 5000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/louis70109/liff-concat-js.git"
+  },
+  "keywords": [
+    "liff"
+  ],
+  "author": "NiJia",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/louis70109/liff-concat-js/issues"
+  },
+  "homepage": "https://github.com/louis70109/liff-concat-js#readme",
+  "dependencies": {
+    "ejs": "^3.1.3",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.4"
+  }
+}
