@@ -1,10 +1,14 @@
 const express = require("express");
 const app = express();
 const port = 5000;
-require("dotenv").config();
+
+if (process.env.NODE_ENV != "production") {
+  require("dotenv").config();
+}
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
 app.set("views", __dirname + "/views");
+
 app.get("/notify", (req, res) => {
   if (req.query["liff.state"]) {
     res.render("redirect", {
