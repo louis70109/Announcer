@@ -3,15 +3,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>推播綁定完成</title>
+    <title>跳轉完成</title>
   </head>
   <body>
-    <h1><%= Object.keys(fragments) %></h1>
-    <h1><%= Object.values(fragments) %></h1>
+    <h1>跳轉完成</h1>
+    <h1>Query params keys: <%= Object.keys(fragments) %></h1>
+    <h1>Query params values: <%= Object.values(fragments) %></h1>
     <script src="https://static.line-scdn.net/liff/edge/versions/2.3.1/sdk.js"></script>
 
     <script>
-      console.log();
       liff
         .init({ liffId: "<%= liffId %>" })
         .then(() => {})
