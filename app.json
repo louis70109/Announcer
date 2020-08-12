@@ -1,0 +1,14 @@
+{
+  "name": "heroku-buildpack-nodejs",
+  "description": "LINE LIFF nodejs template",
+  "repository": "https://github.com/louis70109/liff-concatenate-js",
+  "keywords": ["LINE", "express", "nodejs", "static"],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
+    },
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
