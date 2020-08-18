@@ -9,7 +9,7 @@ app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
 app.set("views", __dirname + "/views");
 
-app.get("/notify", (req, res) => {
+app.get("/notify", (req: any, res: any) => {
   if (req.query["liff.state"]) {
     res.render("redirect", {
       liffId: process.env.CONCAT_ID,
