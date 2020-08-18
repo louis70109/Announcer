@@ -2,12 +2,13 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-This is a template for LIFF concatenate mode by nodejs.
+This is a template for LIFF concatenate mode by nodejs & typescript.
 
 # Environment
 
 - LINE LIFF v2.3 concat mode
 - Express / nodejs v12.18
+- TypeScript
 
 # Heroku
 
@@ -60,6 +61,14 @@ npx ngrok http 5000
 3. Copy url to LINE Developer Console
 
 ![](https://i.imgur.com/xOingAO.png)
+
+4. If you want to deploy, use following command:
+
+```
+npm run build
+```
+
+This commnad will compile typescript file to javascript file in `dist/`.
 
 # License
 
