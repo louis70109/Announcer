@@ -1,16 +1,16 @@
 {
-  "name": "liff-concat-js",
+  "name": "liff-concat-ts",
   "version": "1.0.0",
   "description": "This is a liff concat test project",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "dev": "nodemon ./index.js localhost 5000",
-    "start": "cross-env NODE_ENV=production node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "cross-env NODE_ENV=production node ./dist/index.js",
+    "dev": "nodemon index.ts",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/louis70109/liff-concatenate-js.git"
+    "url": "git+https://github.com/louis70109/liff-concatenate-ts.git"
   },
   "keywords": [
     "liff"
@@ -18,9 +18,9 @@
   "author": "NiJia",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/louis70109/liff-concatenate-js/issues"
+    "url": "https://github.com/louis70109/liff-concatenate-ts/issues"
   },
-  "homepage": "https://github.com/louis70109/liff-concatenate-js#readme",
+  "homepage": "https://github.com/louis70109/liff-concatenate-ts#readme",
   "dependencies": {
     "cross-env": "^7.0.2",
     "ejs": "^3.1.3",
