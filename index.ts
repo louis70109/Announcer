@@ -1,26 +1,26 @@
 if (process.env.NODE_ENV != "production") {
   require("dotenv").config();
 }
-const express = require("express");
-const app = express();
-const line = require("@line/bot-sdk");
-import { MiddlewareConfig } from "@line/bot-sdk/lib/types";
+import express from "express";
+import { middleware, FlexMessage } from "@line/bot-sdk";
 import { handleEvent } from "./src/index";
-import { Request } from "@line/bot-sdk/dist/middleware";
-import { generateFlex } from "./utils/flex";
+import { Request, Response } from "express/index";
+import { generateFlex, buildFlexContent } from "./utils/flex";
+import { MiddlewareConfig } from "@line/bot-sdk/lib/types";
+const app = express();
 
 const { CHANNEL_SECRET, CHANNEL_ACCESS_TOKEN, CONCAT_ID, PORT } = process.env;
-const port = Number(PORT) || 5000;
-const config: MiddlewareConfig = {
+const lineConfig: MiddlewareConfig = {
   channelAccessToken: CHANNEL_ACCESS_TOKEN || "",
   channelSecret: CHANNEL_SECRET || "",
 };
+const port: number = Number(PORT) || 5000;
 
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
 app.set("views", __dirname + "/views");
 
-app.get("/notify", (req: any, res: any) => {
+app.get("/notify", (req: Request, res: Response) => {
   if (req.query["liff.state"]) {
     res.render("redirect", {
       liffId: CONCAT_ID,
@@ -33,12 +33,24 @@ app.get("/notify", (req: any, res: any) => {
   });
 });
 
-app.get("/liff/share", (req: any, res: any) => {
-  const flex = {
-    type: "flex",
-    altText: "活動通知",
-    contents: generateFlex(true),
-  };
+app.get("/liff/template", (req: Request, res: Response) => {
+  res.render("template", { liffId: CONCAT_ID });
+});
+
+app.get("/liff/share", (req: Request, res: Response) => {
+  const query: any = req.query;
+  const flex: FlexMessage = buildFlexContent(
+    "活動通知",
+    generateFlex(
+      query.title,
+      query.place,
+      query.time,
+      query.url,
+      query.desc,
+      true
+    )
+  );
+
   res.render("share", {
     liffId: CONCAT_ID,
     flex: JSON.stringify(flex),
@@ -47,8 +59,8 @@ app.get("/liff/share", (req: any, res: any) => {
 
 app.post(
   "/webhooks/line",
-  line.middleware(config),
-  (req: Request, res: any) => {
+  middleware(lineConfig),
+  (req: Request, res: Response) => {
     Promise.all(req.body.events.map(handleEvent))
       .then((result) => res.json(result))
       .catch((err) => {
