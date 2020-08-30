@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Input</h1>
+    <form action="/flex" method="get">
+      title: <input type="text" name="title" id="title" />
+      <br />
+      place: <input type="text" name="place" id="place" />
+      <br />
+      time:<input type="text" name="time" id="time" />
+      <br />
+      url: <input type="text" name="url" id="url" />
+      <br />
+      description:
+      <textarea name="desc" id="desc" cols="30" rows="10"></textarea>
+      <br />
+      submit: <input type="submit" value="送出" />
+    </form>
+    <script src="https://static.line-scdn.net/liff/edge/versions/2.3.1/sdk.js"></script>
+  </body>
+  <script>
+    liff
+      .init({ liffId: "<%= liffId %>" })
+      .then(() => {
+        if (!liff.isLoggedIn()) {
+          liff.login({ redirectUri: location.href });
+          return new Promise((resolve) => {}); // 永遠不會結束的 Promise
+        }
+      })
+      .catch((err) => {
+        alert("ERROR 0.0");
+      });
+  </script>
+</html>
