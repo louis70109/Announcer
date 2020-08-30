@@ -1,14 +1,23 @@
-function jsonEscape(str: String): String {
+import { FlexMessage } from "@line/bot-sdk/lib/types";
+
+function jsonEscape(str: string): string {
   return str.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t");
 }
-export function buildFlexContent(altText: String, contents: any) {
+export function buildFlexContent(altText: string, contents: any): FlexMessage {
   return {
     type: "flex",
     altText,
     contents,
   };
 }
-export function generateFlex(liff = false) {
+export function generateFlex(
+  title: string,
+  place: string,
+  time: string,
+  Url: string,
+  description: string,
+  liff: boolean = false
+) {
   // if (kwargs) {
   //   // need to append to bubble object
   //   const hero = {
@@ -24,15 +33,6 @@ export function generateFlex(liff = false) {
   //     },
   //   };
   // }
-  const title: String = "Internal Hackathon";
-  const place: String = "@10-2";
-  const time: String = "13:00~18:00";
-  const wikiUrl: String = "https://liff.line.me/1622939248-JYQqZerE";
-  const description: String = `sdfdsf
-dsfdsfdsf
- dsf
-dsfdsf
-中文`;
 
   return {
     type: "bubble",
@@ -133,8 +133,8 @@ dsfdsf
           height: "sm",
           action: {
             type: "uri",
-            label: "WIKI",
-            uri: wikiUrl,
+            label: "連結",
+            uri: Url,
           },
         },
         {
