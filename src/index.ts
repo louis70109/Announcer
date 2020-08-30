@@ -1,16 +1,12 @@
 import { generateFlex, buildFlexContent } from "../utils/flex";
+import { Client } from "@line/bot-sdk";
 import { FlexMessage } from "@line/bot-sdk/lib/types";
 
-const line = require("@line/bot-sdk");
-
 // create LINE SDK config from env variables
-const config = {
-  channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
-  channelSecret: process.env.CHANNEL_SECRET,
-};
-
-// create LINE SDK client
-const client = new line.Client(config);
+const client = new Client({
+  channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN || "",
+  channelSecret: process.env.CHANNEL_SECRET || "",
+});
 
 function handleEvent(event: any) {
   if (event.source.userId === "Udeadbeefdeadbeefdeadbeefdeadbeef") return; // webhook verify
@@ -20,7 +16,10 @@ function handleEvent(event: any) {
     return Promise.resolve(null);
   }
 
-  const flex: any = buildFlexContent("測試數據", generateFlex());
+  const flex: FlexMessage = buildFlexContent(
+    "測試數據",
+    generateFlex("title", "@10-2", "10:00~12:00", "http://123.com", "asdsadsad")
+  );
 
   // create a echoing text message
   const echo = { type: "text", text: event.message.text };
