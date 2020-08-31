@@ -18,7 +18,13 @@ function handleEvent(event: any) {
 
   const flex: FlexMessage = buildFlexContent(
     "測試數據",
-    generateFlex("title", "@10-2", "10:00~12:00", "http://123.com", "asdsadsad")
+    generateFlex(
+      "title",
+      "@10-2",
+      "10:00~12:00",
+      `https://liff.line.me/${process.env.CONCAT_ID}`,
+      "123"
+    )
   );
 
   // create a echoing text message
