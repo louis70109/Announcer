@@ -1,13 +1,18 @@
+import express from "express";
+const app = express();
+app.engine("html", require("ejs").renderFile);
+app.set("view engine", "html");
+app.set("views", "../" + __dirname + "/views");
+
 if (process.env.NODE_ENV != "production") {
   require("dotenv").config();
+  app.set("views", __dirname + "/views");
 }
-import express from "express";
 import { middleware, FlexMessage } from "@line/bot-sdk";
 import { handleEvent } from "./src/index";
 import { Request, Response } from "express/index";
 import { generateFlex, buildFlexContent } from "./utils/flex";
 import { MiddlewareConfig } from "@line/bot-sdk/lib/types";
-const app = express();
 
 const { CHANNEL_SECRET, CHANNEL_ACCESS_TOKEN, CONCAT_ID, PORT } = process.env;
 const lineConfig: MiddlewareConfig = {
@@ -15,10 +20,6 @@ const lineConfig: MiddlewareConfig = {
   channelSecret: CHANNEL_SECRET || "",
 };
 const port: number = Number(PORT) || 5000;
-
-app.engine("html", require("ejs").renderFile);
-app.set("view engine", "html");
-app.set("views", __dirname + "/views");
 
 app.get("/notify", (req: Request, res: Response) => {
   if (req.query["liff.state"]) {
