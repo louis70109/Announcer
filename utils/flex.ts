@@ -1,5 +1,6 @@
 import { FlexMessage } from "@line/bot-sdk/lib/types";
 import { gaScreenView, jsonEscape } from "./common";
+import { flexUrlTemplate } from "../types/flexTemplate";
 
 export function buildFlexContent(altText: string, contents: any): FlexMessage {
   return {
@@ -8,14 +9,7 @@ export function buildFlexContent(altText: string, contents: any): FlexMessage {
     contents,
   };
 }
-export function generateFlex(
-  title: string,
-  place: string,
-  time: string,
-  url: string,
-  description: string,
-  liff: boolean = false
-) {
+export function generateFlex(query: flexUrlTemplate, liff: boolean = false) {
   // if (kwargs) {
   //   // need to append to bubble object
   //   const hero = {
@@ -31,6 +25,32 @@ export function generateFlex(
   //     },
   //   };
   // }
+  let footerContents: any = [],
+    footer: any = {};
+
+  if (query.url) {
+    // Avoid uri got multi-value
+    footerContents.push({
+      type: "button",
+      style: "primary",
+      height: "sm",
+      action: {
+        type: "uri",
+        label: "連結",
+        uri: query.url,
+      },
+    });
+
+    footer = {
+      footer: {
+        type: "box",
+        layout: "vertical",
+        spacing: "sm",
+        contents: footerContents,
+        flex: 0,
+      },
+    };
+  }
 
   return {
     type: "bubble",
@@ -43,7 +63,7 @@ export function generateFlex(
       contents: [
         {
           type: "image",
-          url: gaScreenView(title),
+          url: gaScreenView(query.title),
           aspectRatio: "1:1",
           size: "full",
           aspectMode: "cover",
@@ -56,7 +76,7 @@ export function generateFlex(
       contents: [
         {
           type: "text",
-          text: title,
+          text: query.title,
           weight: "bold",
           size: "xl",
         },
@@ -80,7 +100,7 @@ export function generateFlex(
                 },
                 {
                   type: "text",
-                  text: place,
+                  text: query.place,
                   wrap: true,
                   color: "#666666",
                   size: "sm",
@@ -102,7 +122,7 @@ export function generateFlex(
                 },
                 {
                   type: "text",
-                  text: time,
+                  text: query.time,
                   wrap: true,
                   color: "#666666",
                   size: "sm",
@@ -124,7 +144,9 @@ export function generateFlex(
                 },
                 {
                   type: "text",
-                  text: liff ? jsonEscape(description) : description,
+                  text: liff
+                    ? jsonEscape(query.description)
+                    : query.description,
                   wrap: true,
                   color: "#666666",
                   size: "sm",
@@ -136,27 +158,6 @@ export function generateFlex(
         },
       ],
     },
-    footer: {
-      type: "box",
-      layout: "vertical",
-      spacing: "sm",
-      contents: [
-        {
-          type: "button",
-          style: "link",
-          height: "sm",
-          action: {
-            type: "uri",
-            label: "連結",
-            uri: url,
-          },
-        },
-        {
-          type: "spacer",
-          size: "sm",
-        },
-      ],
-      flex: 0,
-    },
+    ...(footer ? footer : undefined),
   };
 }

@@ -13,6 +13,7 @@ import { handleEvent } from "./src/index";
 import { Request, Response } from "express/index";
 import { generateFlex, buildFlexContent } from "./utils/flex";
 import { MiddlewareConfig } from "@line/bot-sdk/lib/types";
+import { flexUrlTemplate } from "./types/flexTemplate";
 
 const { CHANNEL_SECRET, CHANNEL_ACCESS_TOKEN, CONCAT_ID, PORT } = process.env;
 const lineConfig: MiddlewareConfig = {
@@ -40,16 +41,16 @@ app.get("/liff/template", (req: Request, res: Response) => {
 
 app.get("/liff/share", (req: Request, res: Response) => {
   const query: any = req.query;
+  const flexQuery: flexUrlTemplate = {
+    title: query.title,
+    place: query.place,
+    time: query.time,
+    url: query.url,
+    description: query.desc,
+  };
   const flex: FlexMessage = buildFlexContent(
-    "活動通知",
-    generateFlex(
-      query.title,
-      query.place,
-      query.time,
-      query.url,
-      query.desc,
-      true
-    )
+    query.title,
+    generateFlex(flexQuery, true)
   );
 
   res.render("share", {

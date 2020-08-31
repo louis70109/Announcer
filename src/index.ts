@@ -1,6 +1,7 @@
 import { generateFlex, buildFlexContent } from "../utils/flex";
 import { Client } from "@line/bot-sdk";
 import { FlexMessage } from "@line/bot-sdk/lib/types";
+import { flexUrlTemplate } from "../types/flexTemplate";
 
 // create LINE SDK config from env variables
 const client = new Client({
@@ -15,16 +16,16 @@ function handleEvent(event: any) {
     // ignore non-text-message event
     return Promise.resolve(null);
   }
-
+  const flexQuery: flexUrlTemplate = {
+    title: "I am title",
+    place: "@10-4",
+    time: "10:30~11:00",
+    // url: `https://liff.line.me/${process.env.CONCAT_ID}`,
+    description: "description",
+  };
   const flex: FlexMessage = buildFlexContent(
     "測試數據",
-    generateFlex(
-      "title",
-      "@10-2",
-      "10:00~12:00",
-      `https://liff.line.me/${process.env.CONCAT_ID}`,
-      "123"
-    )
+    generateFlex(flexQuery)
   );
 
   // create a echoing text message
