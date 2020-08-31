@@ -2,7 +2,7 @@ import express from "express";
 const app = express();
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
-app.set("views", __dirname + "/../views");
+app.set("views", __dirname + "/../views"); // production env
 
 if (process.env.NODE_ENV != "production") {
   require("dotenv").config();
