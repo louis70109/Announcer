@@ -1,8 +1,6 @@
 import { FlexMessage } from "@line/bot-sdk/lib/types";
+import { gaScreenView, jsonEscape } from "./common";
 
-function jsonEscape(str: string): string {
-  return str.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t");
-}
 export function buildFlexContent(altText: string, contents: any): FlexMessage {
   return {
     type: "flex",
@@ -14,7 +12,7 @@ export function generateFlex(
   title: string,
   place: string,
   time: string,
-  Url: string,
+  url: string,
   description: string,
   liff: boolean = false
 ) {
@@ -36,6 +34,22 @@ export function generateFlex(
 
   return {
     type: "bubble",
+    header: {
+      type: "box",
+      layout: "vertical",
+      width: "1px",
+      height: "1px",
+      paddingAll: "0px",
+      contents: [
+        {
+          type: "image",
+          url: gaScreenView(title),
+          aspectRatio: "1:1",
+          size: "full",
+          aspectMode: "cover",
+        },
+      ],
+    },
     body: {
       type: "box",
       layout: "vertical",
@@ -134,7 +148,7 @@ export function generateFlex(
           action: {
             type: "uri",
             label: "連結",
-            uri: Url,
+            uri: url,
           },
         },
         {
