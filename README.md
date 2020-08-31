@@ -2,11 +2,16 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-This is a template for LIFF concatenate mode by nodejs & typescript.
+Announcer is used [ShareTargetPicker](https://developers.line.biz/en/reference/liff/#share-target-picker) to announce Flex Message to User/Group/Room with LINE.
+
+- Trigger bot to send Announcer url.
+- Input message to columns.
+- Send to User/Group/Room.
+- If you want to use GA, please reference [this article](https://taichunmin.idv.tw/blog/2020-04-28-lintbot-google-analytics.html).
 
 # Environment
 
-- LINE LIFF v2.3 concat mode
+- [LINE LIFF v2.3](https://developers.line.biz/en/reference/liff/)
 - Express / nodejs v12.18
 - TypeScript
 
@@ -28,11 +33,7 @@ heroku logs --tail -a YOUR_HEROKU_NAME
 - Login `LINE Developer Console`.
 - Create a `LINE Login` channel.
 - Click `LIFF` tab and add LIFF application.
-- Input `https://YOUR_URL/notify` in Endpoint URL column.
 - Copy `LIFF ID` to environment `CONCAT_ID` variable.
-- Now you can test concat cases:
-  - https://liff.line.me/LIFF_ID?aaa=bbb
-  - https://liff.line.me/LIFF_ID?a=123&b=456
 
 # Local testing
 
@@ -59,8 +60,6 @@ npx ngrok http 5000
 ![](https://i.imgur.com/azVdG8j.png)
 
 3. Copy url to LINE Developer Console
-
-![](https://i.imgur.com/xOingAO.png)
 
 4. If you want to deploy, use following command:
 
