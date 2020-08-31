@@ -20,7 +20,7 @@ function handleEvent(event: any) {
     title: "I am title",
     place: "@10-4",
     time: "10:30~11:00",
-    // url: `https://liff.line.me/${process.env.CONCAT_ID}`,
+    url: `https://liff.line.me/${process.env.CONCAT_ID}`,
     description: "description",
   };
   const flex: FlexMessage = buildFlexContent(
