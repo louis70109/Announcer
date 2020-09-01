@@ -169,3 +169,185 @@ export function generateFlex(query: flexUrlTemplate, liff: boolean = false) {
     ...(footer ? footer : undefined),
   };
 }
+
+export function activitySchedule() {
+  /**
+   * {
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "班表",
+        "weight": "bold",
+        "color": "#1DB446",
+        "size": "sm"
+      },
+      {
+        "type": "text",
+        "text": "Brown Store",
+        "weight": "bold",
+        "size": "xxl",
+        "margin": "md"
+      },
+      {
+        "type": "text",
+        "text": "地點",
+        "size": "xs",
+        "color": "#aaaaaa",
+        "wrap": true
+      },
+      {
+        "type": "separator",
+        "margin": "xxl"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "margin": "xxl",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "text",
+                "text": "上午場",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "text",
+                "text": "Chewing Gum",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0
+              },
+              {
+                "type": "text",
+                "text": "$0.99",
+                "size": "sm",
+                "color": "#111111",
+                "align": "end"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "text",
+                "text": "Bottled Water",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0
+              },
+              {
+                "type": "text",
+                "text": "$3.33",
+                "size": "sm",
+                "color": "#111111",
+                "align": "end"
+              }
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "xxl"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "text",
+                "text": "下午場",
+                "size": "sm",
+                "color": "#555555"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "text",
+                "text": "CASH",
+                "size": "sm",
+                "color": "#555555"
+              },
+              {
+                "type": "text",
+                "text": "$8.0",
+                "size": "sm",
+                "color": "#111111",
+                "align": "end"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "text",
+                "text": "CHANGE",
+                "size": "sm",
+                "color": "#555555"
+              },
+              {
+                "type": "text",
+                "text": "$0.69",
+                "size": "sm",
+                "color": "#111111",
+                "align": "end"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "button",
+        "action": {
+          "type": "uri",
+          "label": "參考連結",
+          "uri": "http://linecorp.com/"
+        },
+        "style": "primary"
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "uri",
+          "label": "地圖",
+          "uri": "http://linecorp.com/"
+        }
+      }
+    ]
+  },
+  "styles": {
+    "footer": {
+      "separator": true
+    }
+  }
+}
+   */
+}
