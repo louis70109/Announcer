@@ -76,6 +76,14 @@ export function generateFlex(query: flexUrlTemplate, liff: boolean = false) {
       contents: [
         {
           type: "text",
+          text: query.activity,
+          weight: "bold",
+          wrap: true,
+          color: "#1DB446",
+          size: "sm",
+        },
+        {
+          type: "text",
           text: query.title,
           weight: "bold",
           size: "xl",

@@ -6,4 +6,5 @@ export type flexUrlTemplate = {
   time: string;
   url?: string;
   description: string;
+  activity: string;
 };

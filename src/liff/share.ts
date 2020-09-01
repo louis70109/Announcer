@@ -11,7 +11,10 @@ export function shareController(req: Request, res: Response) {
     time: query.time,
     url: query.url,
     description: query.desc,
+    activity: query.activity,
   };
+  // use query.template to judge different template
+
   const flex: FlexMessage = buildFlexContent(
     query.title,
     generateFlex(flexQuery, true)

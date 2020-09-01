@@ -22,6 +22,7 @@ function handleEvent(event: any) {
     time: "10:30~11:00",
     url: `https://liff.line.me/${process.env.CONCAT_ID}/?template=1`,
     description: "description",
+    activity: "活動",
   };
   const flex: FlexMessage = buildFlexContent(
     "測試數據",

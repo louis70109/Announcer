@@ -11,18 +11,26 @@
   <body>
     <h1>Input</h1>
     <form action="/liff/share" method="get">
-      title: <input type="text" name="title" id="title" />
+      標題: <input type="text" name="title" id="title" required />
       <br />
-      place: <input type="text" name="place" id="place" />
+      地點: <input type="text" name="place" id="place" required />
       <br />
-      time:<input type="text" name="time" id="time" />
+      時間:<input type="text" name="time" id="time" required />
       <br />
-      url: <input type="text" name="url" id="url" />
+      網址(選填): <input type="text" name="url" id="url" />
       <br />
-      description:
+      標籤: <input type="text" name="activity" id="activity" required />
+      <br />
+      描述:
       <textarea name="desc" id="desc" cols="30" rows="10"></textarea>
+      <input
+        type="hidden"
+        name="template"
+        id="template"
+        value="<%= template %>"
+      />
       <br />
-      submit: <input type="submit" value="送出" />
+      <input type="submit" value="送出" />
     </form>
     <script src="https://static.line-scdn.net/liff/edge/versions/2.3.1/sdk.js"></script>
   </body>
