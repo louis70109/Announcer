@@ -14,6 +14,7 @@ import { Request, Response } from "express/index";
 import { generateFlex, buildFlexContent } from "./utils/flex";
 import { MiddlewareConfig } from "@line/bot-sdk/lib/types";
 import { flexUrlTemplate } from "./types/flexTemplate";
+import { shareController } from "./src/liff/share";
 
 const { CHANNEL_SECRET, CHANNEL_ACCESS_TOKEN, CONCAT_ID, PORT } = process.env;
 const lineConfig: MiddlewareConfig = {
@@ -22,42 +23,18 @@ const lineConfig: MiddlewareConfig = {
 };
 const port: number = Number(PORT) || 5000;
 
-app.get("/notify", (req: Request, res: Response) => {
+app.get("/liff/template", (req: Request, res: Response) => {
   if (req.query["liff.state"]) {
     res.render("redirect", {
       liffId: CONCAT_ID,
     });
   }
-
-  res.render("index", {
-    fragments: req.query,
-    liffId: CONCAT_ID,
-  });
+  res.render("template", { liffId: CONCAT_ID, template: req.query.template });
 });
 
-app.get("/liff/template", (req: Request, res: Response) => {
-  res.render("template", { liffId: CONCAT_ID });
-});
-
-app.get("/liff/share", (req: Request, res: Response) => {
-  const query: any = req.query;
-  const flexQuery: flexUrlTemplate = {
-    title: query.title,
-    place: query.place,
-    time: query.time,
-    url: query.url,
-    description: query.desc,
-  };
-  const flex: FlexMessage = buildFlexContent(
-    query.title,
-    generateFlex(flexQuery, true)
-  );
-
-  res.render("share", {
-    liffId: CONCAT_ID,
-    flex: JSON.stringify(flex),
-  });
-});
+app.get("/liff/share", (req: Request, res: Response) =>
+  shareController(req, res)
+);
 
 app.post(
   "/webhooks/line",
