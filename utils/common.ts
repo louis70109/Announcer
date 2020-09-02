@@ -1,4 +1,6 @@
 import qs from "qs";
+import { FlexCarousel } from "@line/bot-sdk";
+
 export function gaScreenView(
   name: string,
   lineId: string = "Ud6ab866a67af711d594b12b0baffb8ac"
@@ -19,6 +21,14 @@ export function gaScreenView(
     z: +new Date(),
   })}`;
 }
+
 export function jsonEscape(str: string): string {
   return str.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t");
+}
+
+export function buildCarouselContent(contents: any): FlexCarousel {
+  return {
+    type: "carousel",
+    contents: contents,
+  };
 }

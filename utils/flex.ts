@@ -1,6 +1,7 @@
 import { FlexMessage } from "@line/bot-sdk/lib/types";
 import { gaScreenView, jsonEscape } from "./common";
-import { flexUrlTemplate } from "../types/flexTemplate";
+import { flexUrlTemplate, staffList } from "../types/flexTemplate";
+import { FlexBubble } from "@line/bot-sdk";
 
 export function buildFlexContent(altText: string, contents: any): FlexMessage {
   return {
@@ -9,7 +10,11 @@ export function buildFlexContent(altText: string, contents: any): FlexMessage {
     contents,
   };
 }
-export function generateFlex(query: flexUrlTemplate, liff: boolean = false) {
+0;
+export function generateFlex(
+  query: flexUrlTemplate,
+  liff: boolean = false
+): FlexBubble {
   // if (kwargs) {
   //   // need to append to bubble object
   //   const hero = {
@@ -170,184 +175,170 @@ export function generateFlex(query: flexUrlTemplate, liff: boolean = false) {
   };
 }
 
-export function activitySchedule() {
-  /**
-   * {
-  "type": "bubble",
-  "body": {
-    "type": "box",
-    "layout": "vertical",
-    "contents": [
+export function activitySchedule(query: staffList): FlexBubble {
+  let morning: any = [],
+    afternoon: any = [],
+    footerContents: any = [],
+    footer: any = {};
+  if (query.morning) {
+    morning = [
       {
-        "type": "text",
-        "text": "班表",
-        "weight": "bold",
-        "color": "#1DB446",
-        "size": "sm"
+        type: "box",
+        layout: "horizontal",
+        contents: [
+          {
+            type: "text",
+            text: "上午場",
+            size: "sm",
+            color: "#555555",
+            flex: 0,
+          },
+        ],
       },
-      {
-        "type": "text",
-        "text": "Brown Store",
-        "weight": "bold",
-        "size": "xxl",
-        "margin": "md"
-      },
-      {
-        "type": "text",
-        "text": "地點",
-        "size": "xs",
-        "color": "#aaaaaa",
-        "wrap": true
-      },
-      {
-        "type": "separator",
-        "margin": "xxl"
-      },
-      {
-        "type": "box",
-        "layout": "vertical",
-        "margin": "xxl",
-        "spacing": "sm",
-        "contents": [
+    ];
+
+    query.morning.map((el) => {
+      morning.push({
+        type: "box",
+        layout: "horizontal",
+        contents: [
           {
-            "type": "box",
-            "layout": "horizontal",
-            "contents": [
-              {
-                "type": "text",
-                "text": "上午場",
-                "size": "sm",
-                "color": "#555555",
-                "flex": 0
-              }
-            ]
+            type: "text",
+            text: el.name,
+            size: "sm",
+            color: "#555555",
+            flex: 0,
           },
           {
-            "type": "box",
-            "layout": "horizontal",
-            "contents": [
-              {
-                "type": "text",
-                "text": "Chewing Gum",
-                "size": "sm",
-                "color": "#555555",
-                "flex": 0
-              },
-              {
-                "type": "text",
-                "text": "$0.99",
-                "size": "sm",
-                "color": "#111111",
-                "align": "end"
-              }
-            ]
+            type: "text",
+            text: el.time,
+            size: "sm",
+            color: "#111111",
+            align: "end",
           },
-          {
-            "type": "box",
-            "layout": "horizontal",
-            "contents": [
-              {
-                "type": "text",
-                "text": "Bottled Water",
-                "size": "sm",
-                "color": "#555555",
-                "flex": 0
-              },
-              {
-                "type": "text",
-                "text": "$3.33",
-                "size": "sm",
-                "color": "#111111",
-                "align": "end"
-              }
-            ]
-          },
-          {
-            "type": "separator",
-            "margin": "xxl"
-          },
-          {
-            "type": "box",
-            "layout": "horizontal",
-            "contents": [
-              {
-                "type": "text",
-                "text": "下午場",
-                "size": "sm",
-                "color": "#555555"
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "horizontal",
-            "contents": [
-              {
-                "type": "text",
-                "text": "CASH",
-                "size": "sm",
-                "color": "#555555"
-              },
-              {
-                "type": "text",
-                "text": "$8.0",
-                "size": "sm",
-                "color": "#111111",
-                "align": "end"
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "horizontal",
-            "contents": [
-              {
-                "type": "text",
-                "text": "CHANGE",
-                "size": "sm",
-                "color": "#555555"
-              },
-              {
-                "type": "text",
-                "text": "$0.69",
-                "size": "sm",
-                "color": "#111111",
-                "align": "end"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "footer": {
-    "type": "box",
-    "layout": "vertical",
-    "contents": [
-      {
-        "type": "button",
-        "action": {
-          "type": "uri",
-          "label": "參考連結",
-          "uri": "http://linecorp.com/"
-        },
-        "style": "primary"
-      },
-      {
-        "type": "button",
-        "action": {
-          "type": "uri",
-          "label": "地圖",
-          "uri": "http://linecorp.com/"
-        }
-      }
-    ]
-  },
-  "styles": {
-    "footer": {
-      "separator": true
-    }
+        ],
+      });
+    });
   }
-}
-   */
+  if (query.afternoon) {
+    afternoon = [
+      {
+        type: "box",
+        layout: "horizontal",
+        contents: [
+          {
+            type: "text",
+            text: "下午場",
+            size: "sm",
+            color: "#555555",
+          },
+        ],
+      },
+    ];
+
+    query.afternoon.map((el) => {
+      afternoon.push({
+        type: "box",
+        layout: "horizontal",
+        contents: [
+          {
+            type: "text",
+            text: el.name,
+            size: "sm",
+            color: "#555555",
+            flex: 0,
+          },
+          {
+            type: "text",
+            text: el.time,
+            size: "sm",
+            color: "#111111",
+            align: "end",
+          },
+        ],
+      });
+    });
+  }
+
+  if (query.url) {
+    // Avoid uri got multi-value
+    footerContents.push({
+      type: "button",
+      style: "primary",
+      height: "sm",
+      action: {
+        type: "uri",
+        label: "參考連結",
+        uri: query.url,
+      },
+    });
+    footerContents.push({
+      type: "button",
+      action: {
+        type: "uri",
+        label: "地圖",
+        uri: query.map,
+      },
+    });
+
+    footer = {
+      footer: {
+        type: "box",
+        layout: "vertical",
+        spacing: "sm",
+        contents: footerContents,
+        flex: 0,
+      },
+    };
+  }
+
+  return {
+    type: "bubble",
+    body: {
+      type: "box",
+      layout: "vertical",
+      contents: [
+        {
+          type: "text",
+          text: query.activity,
+          weight: "bold",
+          color: "#1DB446",
+          size: "sm",
+        },
+        {
+          type: "text",
+          text: query.title,
+          weight: "bold",
+          size: "xxl",
+          margin: "md",
+        },
+        {
+          type: "text",
+          text: query.place,
+          size: "xs",
+          color: "#aaaaaa",
+          wrap: true,
+        },
+        {
+          type: "separator",
+          margin: "xxl",
+        },
+        {
+          type: "box",
+          layout: "vertical",
+          margin: "xxl",
+          spacing: "sm",
+          contents: [
+            ...(morning ? morning : undefined),
+            {
+              type: "separator",
+              margin: "xxl",
+            },
+            ...(afternoon ? afternoon : undefined),
+          ],
+        },
+      ],
+    },
+    ...(footer ? footer : undefined),
+  };
 }
