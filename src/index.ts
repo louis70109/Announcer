@@ -30,7 +30,7 @@ function handleEvent(event: any) {
     activity: "活動",
   };
   const staffQuery: staffList = {
-    title: "10/10 Title",
+    title: "10/10 Title(尚未開放)",
     place: "台北市內湖區瑞光路",
     map:
       "https://www.google.com.tw/maps/search/%E5%8F%B0%E5%8C%97%E8%BB%8A%E7%AB%99/@25.0477223,121.515252,18z/data=!3m1!4b1?hl=zh-TW&authuser=0",

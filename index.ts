@@ -8,12 +8,10 @@ if (process.env.NODE_ENV != "production") {
   require("dotenv").config();
   app.set("views", __dirname + "/views");
 }
-import { middleware, FlexMessage } from "@line/bot-sdk";
+import { middleware } from "@line/bot-sdk";
 import { handleEvent } from "./src/index";
 import { Request, Response } from "express/index";
-import { generateFlex, buildFlexContent } from "./utils/flex";
 import { MiddlewareConfig } from "@line/bot-sdk/lib/types";
-import { flexUrlTemplate } from "./types/flexTemplate";
 import { shareController } from "./src/liff/share";
 
 const { CHANNEL_SECRET, CHANNEL_ACCESS_TOKEN, CONCAT_ID, PORT } = process.env;
