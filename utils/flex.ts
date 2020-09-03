@@ -181,7 +181,13 @@ export function activitySchedule(query: staffList): FlexBubble {
     afternoon: any = [],
     footerContents: any = [],
     footer: any = {};
-  if (query.morning) {
+
+  //Hard fix
+  if (
+    query.morning &&
+    query.morning[0].name !== "" &&
+    query.morning[0].time !== ""
+  ) {
     morning = [
       {
         type: "box",
@@ -199,6 +205,7 @@ export function activitySchedule(query: staffList): FlexBubble {
     ];
 
     query.morning.map((el) => {
+      if (!el.name && !el.time) return;
       morning.push({
         type: "box",
         layout: "horizontal",
@@ -221,7 +228,13 @@ export function activitySchedule(query: staffList): FlexBubble {
       });
     });
   }
-  if (query.afternoon) {
+
+  // Hard fix
+  if (
+    query.afternoon &&
+    query.afternoon[0].name !== "" &&
+    query.afternoon[0].time !== ""
+  ) {
     afternoon = [
       {
         type: "box",
@@ -238,6 +251,8 @@ export function activitySchedule(query: staffList): FlexBubble {
     ];
 
     query.afternoon.map((el) => {
+      if (!el.name && !el.time) return;
+
       afternoon.push({
         type: "box",
         layout: "horizontal",
@@ -273,6 +288,8 @@ export function activitySchedule(query: staffList): FlexBubble {
         uri: query.url,
       },
     });
+  }
+  if (query.map) {
     footerContents.push({
       type: "button",
       action: {
@@ -281,7 +298,8 @@ export function activitySchedule(query: staffList): FlexBubble {
         uri: query.map,
       },
     });
-
+  }
+  if (footerContents) {
     footer = {
       footer: {
         type: "box",
@@ -292,7 +310,6 @@ export function activitySchedule(query: staffList): FlexBubble {
       },
     };
   }
-
   return {
     type: "bubble",
     body: {

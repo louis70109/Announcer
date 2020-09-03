@@ -11,25 +11,7 @@
   <body>
     <h1>Input</h1>
     <form action="/liff/share" method="get">
-      標題: <input type="text" name="title" id="title" required />
-      <br />
-      地點: <input type="text" name="place" id="place" required />
-      <br />
-      時間:<input type="text" name="time" id="time" required />
-      <br />
-      網址(選填): <input type="text" name="url" id="url" />
-      <br />
-      標籤: <input type="text" name="activity" id="activity" required />
-      <br />
-      描述:
-      <textarea name="desc" id="desc" cols="30" rows="10"></textarea>
-      <input
-        type="hidden"
-        name="template"
-        id="template"
-        value="<%= template %>"
-      />
-      <br />
+      <div id="template-form"></div>
       <input type="submit" value="送出" />
     </form>
     <script src="https://static.line-scdn.net/liff/edge/versions/2.3.1/sdk.js"></script>
@@ -46,5 +28,77 @@
       .catch((err) => {
         alert("ERROR 0.0");
       });
+    const urlParams = new URLSearchParams(window.location.search);
+    const template = urlParams.get("template");
+    switch (template) {
+      case "1":
+        document.getElementById(
+          "template-form"
+        ).innerHTML = `標題: <input type="text" name="title" id="title" required />
+        <br />
+        地點: <input type="text" name="place" id="place" required />
+        <br />
+        時間:<input type="text" name="time" id="time" required />
+        <br />
+        網址(選填): <input type="text" name="url" id="url" />
+        <br />
+        標籤: <input type="text" name="activity" id="activity" required />
+        <br />
+        描述:
+        <textarea name="desc" id="desc" cols="30" rows="10"></textarea>
+        <input
+          type="hidden"
+          name="template"
+          id="template"
+          value="<%= template %>"
+        />
+        <br />`;
+        break;
+      case "2":
+        document.getElementById(
+          "template-form"
+        ).innerHTML = `標題: <input type="text" name="title" id="title" required />
+        <br />
+        地點: <input type="text" name="place" id="place" required />
+        <br />
+        網址(選填): <input type="text" name="url" id="url" />
+        <br />
+        Map(選填): <input type="text" name="map" id="map" />
+        <br />
+        標籤: <input type="text" name="activity" id="activity" required />
+
+        <div id="morning-block">
+          上午場
+          姓名1<input type="text" name="morning[0][name]" class="morning" />
+          時間1<input type="text" name="morning[0][time]" class="morning" />
+          <hr />
+          姓名2<input type="text" name="morning[1][name]" class="morning" />
+          時間2<input type="text" name="morning[1][time]" class="morning" />
+          <hr />
+          姓名3<input type="text" name="morning[2][name]" class="morning" />
+          時間3<input type="text" name="morning[2][time]" class="morning" />
+        </div>
+        <div id="afternoon-block">
+          下午場
+          姓名1<input type="text" name="afternoon[0][name]" class="afternoon" />
+          時間1<input type="text" name="afternoon[0][time]" class="afternoon" />
+          <hr />
+          姓名2<input type="text" name="afternoon[1][name]" class="afternoon" />
+          時間2<input type="text" name="afternoon[1][time]" class="afternoon" />
+          <hr />
+          姓名3<input type="text" name="afternoon[2][name]" class="afternoon" />
+          時間3<input type="text" name="afternoon[2][time]" class="afternoon" />
+        </div>
+        <input
+          type="hidden"
+          name="template"
+          id="template"
+          value="<%= template %>"
+        />`;
+        break;
+
+      default:
+        break;
+    }
   </script>
 </html>

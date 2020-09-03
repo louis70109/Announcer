@@ -26,6 +26,9 @@ export function shareController(req: Request, res: Response) {
       place: query.place,
       url: query.url,
       activity: query.activity,
+      map: query.map,
+      morning: query.morning,
+      afternoon: query.afternoon,
     };
 
     flex = buildFlexContent(query.title, activitySchedule(staffQuery));
