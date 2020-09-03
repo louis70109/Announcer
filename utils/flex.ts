@@ -92,6 +92,7 @@ export function generateFlex(
           text: query.title,
           weight: "bold",
           size: "xl",
+          wrap: true,
         },
         {
           type: "box",
@@ -311,6 +312,7 @@ export function activitySchedule(query: staffList): FlexBubble {
           weight: "bold",
           size: "xxl",
           margin: "md",
+          wrap: true,
         },
         {
           type: "text",
