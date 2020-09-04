@@ -1,17 +1,17 @@
 {
-  "name": "liff-concat-ts",
+  "name": "announcer",
   "version": "1.0.0",
-  "description": "This is a liff concat test project",
+  "description": "Announcer can announce Flex Message with LINE",
   "main": "index.ts",
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./dist/index.js",
-    "dev": "npm run build && nodemon index.ts",
+    "dev": "nodemon index.ts",
     "build": "tsc",
     "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/louis70109/liff-concatenate-ts.git"
+    "url": "git+https://github.com/louis70109/Announcer.git"
   },
   "keywords": [
     "liff"
@@ -19,11 +19,10 @@
   "author": "NiJia",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/louis70109/liff-concatenate-ts/issues"
+    "url": "https://github.com/louis70109/Announcer/issues"
   },
-  "homepage": "https://github.com/louis70109/liff-concatenate-ts#readme",
+  "homepage": "https://github.com/louis70109/Announcer#readme",
   "dependencies": {
-    "ts-node": "^8.10.2",
     "typescript": "^3.9.7",
     "@types/node": "^14.6.0",
     "@line/bot-sdk": "^7.0.0",
@@ -34,6 +33,7 @@
     "qs": "^6.9.4"
   },
   "devDependencies": {
+    "ts-node": "^8.10.2",
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.4"
   }
