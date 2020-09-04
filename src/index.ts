@@ -14,37 +14,34 @@ const client = new Client({
   channelSecret: process.env.CHANNEL_SECRET || "",
 });
 const { CONCAT_ID } = process.env;
-function handleEvent(event: any) {
+async function handleEvent(event: any) {
   if (event.source.userId === "Udeadbeefdeadbeefdeadbeefdeadbeef") return; // webhook verify
 
   if (event.type !== "message" || event.message.type !== "text") {
     // ignore non-text-message event
     return Promise.resolve(null);
   }
-  const flexQuery: flexUrlTemplate = {
+  const flexQuery: flexUrlTemplate = await {
     title: "I am title",
     place: "@10-4",
     time: "10:30~11:00",
     url: `https://liff.line.me/${CONCAT_ID}/?template=1`,
+    imageUrl: "https://i.imgur.com/EI8AuUY.jpg",
     description: "description",
     activity: "活動",
   };
-  const staffQuery: staffList = {
+  const staffQuery: staffList = await {
     title: "10/10 Title(尚未開放)",
     place: "台北市內湖區瑞光路",
     map: `https://liff.line.me/${CONCAT_ID}/?template=2`,
     url: `https://liff.line.me/${CONCAT_ID}/?template=2`,
-    activity: "班表",
-    morning: [
+    activity: "參與名單",
+    people: [
       { name: "Moon", time: "10:00~12:00" },
       { name: "Boss", time: "11:00~12:00" },
     ],
-    afternoon: [
-      { name: "brown", time: "13:00~14:00" },
-      { name: "sally", time: "14:00~18:00" },
-    ],
   };
-  const flex: FlexMessage = buildFlexContent(
+  const flex: FlexMessage = await buildFlexContent(
     "測試數據",
     buildCarouselContent([
       generateFlex(flexQuery),
@@ -55,7 +52,7 @@ function handleEvent(event: any) {
   const echo = { type: "text", text: event.message.text };
 
   // use reply API
-  return client.replyMessage(event.replyToken, flex);
+  return await client.replyMessage(event.replyToken, flex);
 }
 
 export { handleEvent };
