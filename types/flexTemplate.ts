@@ -5,10 +5,8 @@ type BaseInfo = {
 };
 
 export interface flexUrlTemplate extends BaseInfo {
-  title: string;
-  place: string;
+  imageUrl?: string;
   time: string;
-  url?: string;
   description: string;
   activity: string;
 }
@@ -19,11 +17,7 @@ type Staff = {
 };
 
 export interface staffList extends BaseInfo {
-  title: string;
-  place: string;
   map?: string;
-  url?: string;
   activity: string;
-  morning?: Array<Staff>;
-  afternoon?: Array<Staff>;
+  people?: Array<Staff>;
 }

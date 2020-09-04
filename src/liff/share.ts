@@ -1,6 +1,5 @@
 import { Request, Response } from "express/index";
 import { flexUrlTemplate, staffList } from "../../types/flexTemplate";
-import { FlexMessage } from "@line/bot-sdk";
 import {
   buildFlexContent,
   generateFlex,
@@ -27,8 +26,7 @@ export function shareController(req: Request, res: Response) {
       url: query.url,
       activity: query.activity,
       map: query.map,
-      morning: query.morning,
-      afternoon: query.afternoon,
+      people: query.people,
     };
 
     flex = buildFlexContent(query.title, activitySchedule(staffQuery));

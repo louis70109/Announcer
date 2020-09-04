@@ -40,9 +40,11 @@
         <br />
         時間:<input type="text" name="time" id="time" required />
         <br />
+        標籤: <input type="text" name="activity" id="activity" required />
+        <br />
         網址(選填): <input type="text" name="url" id="url" />
         <br />
-        標籤: <input type="text" name="activity" id="activity" required />
+        圖片網址(選填): <input type="text" name="imageUrl" id="imageUrl" required />
         <br />
         描述:
         <textarea name="desc" id="desc" cols="30" rows="10"></textarea>
@@ -67,27 +69,25 @@
         <br />
         標籤: <input type="text" name="activity" id="activity" required />
 
-        <div id="morning-block">
-          上午場
-          姓名1<input type="text" name="morning[0][name]" class="morning" />
-          時間1<input type="text" name="morning[0][time]" class="morning" />
+        <div id="people-block">
+          名單：
+          姓名1<input type="text" name="people[0][name]" class="people" />
+          時間1<input type="text" name="people[0][time]" class="people" />
           <hr />
-          姓名2<input type="text" name="morning[1][name]" class="morning" />
-          時間2<input type="text" name="morning[1][time]" class="morning" />
+          姓名2<input type="text" name="people[1][name]" class="people" />
+          時間2<input type="text" name="people[1][time]" class="people" />
           <hr />
-          姓名3<input type="text" name="morning[2][name]" class="morning" />
-          時間3<input type="text" name="morning[2][time]" class="morning" />
-        </div>
-        <div id="afternoon-block">
-          下午場
-          姓名1<input type="text" name="afternoon[0][name]" class="afternoon" />
-          時間1<input type="text" name="afternoon[0][time]" class="afternoon" />
+          姓名3<input type="text" name="people[2][name]" class="people" />
+          時間3<input type="text" name="people[2][time]" class="people" />
+
+          姓名4<input type="text" name="people[3][name]" class="people" />
+          時間4<input type="text" name="people[3][time]" class="people" />
           <hr />
-          姓名2<input type="text" name="afternoon[1][name]" class="afternoon" />
-          時間2<input type="text" name="afternoon[1][time]" class="afternoon" />
+          姓名5<input type="text" name="people[4][name]" class="people" />
+          時間5<input type="text" name="people[4][time]" class="people" />
           <hr />
-          姓名3<input type="text" name="afternoon[2][name]" class="afternoon" />
-          時間3<input type="text" name="afternoon[2][time]" class="afternoon" />
+          姓名6<input type="text" name="people[5][name]" class="people" />
+          時間6<input type="text" name="people[5][time]" class="people" />
         </div>
         <input
           type="hidden"

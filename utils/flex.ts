@@ -15,23 +15,25 @@ export function generateFlex(
   query: flexUrlTemplate,
   liff: boolean = false
 ): FlexBubble {
-  // if (kwargs) {
-  //   // need to append to bubble object
-  //   const hero = {
-  //     type: "image",
-  //     url:
-  //       "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png",
-  //     size: "full",
-  //     aspectRatio: "20:13",
-  //     aspectMode: "cover",
-  //     action: {
-  //       type: "uri",
-  //       uri: "http://linecorp.com/",
-  //     },
-  //   };
-  // }
   let footerContents: any = [],
-    footer: any = {};
+    footer: any = {},
+    hero: any = {};
+  if (query.imageUrl) {
+    // need to append to bubble object
+    hero = {
+      hero: {
+        type: "image",
+        url: query.imageUrl,
+        size: "full",
+        aspectRatio: "20:13",
+        aspectMode: "cover",
+        action: {
+          type: "uri",
+          uri: query.imageUrl,
+        },
+      },
+    };
+  }
 
   if (query.url) {
     // Avoid uri got multi-value
@@ -75,6 +77,7 @@ export function generateFlex(
         },
       ],
     },
+    ...(hero ? hero : undefined),
     body: {
       type: "box",
       layout: "vertical",
@@ -177,25 +180,24 @@ export function generateFlex(
 }
 
 export function activitySchedule(query: staffList): FlexBubble {
-  let morning: any = [],
-    afternoon: any = [],
+  let people: any = [],
     footerContents: any = [],
     footer: any = {};
 
   //Hard fix
   if (
-    query.morning &&
-    query.morning[0].name !== "" &&
-    query.morning[0].time !== ""
+    query.people &&
+    query.people[0].name !== "" &&
+    query.people[0].time !== ""
   ) {
-    morning = [
+    people = [
       {
         type: "box",
         layout: "horizontal",
         contents: [
           {
             type: "text",
-            text: "上午場",
+            text: "名單",
             size: "sm",
             color: "#555555",
             flex: 0,
@@ -204,9 +206,9 @@ export function activitySchedule(query: staffList): FlexBubble {
       },
     ];
 
-    query.morning.map((el) => {
+    query.people.map((el) => {
       if (!el.name && !el.time) return;
-      morning.push({
+      people.push({
         type: "box",
         layout: "horizontal",
         contents: [
@@ -228,54 +230,6 @@ export function activitySchedule(query: staffList): FlexBubble {
       });
     });
   }
-
-  // Hard fix
-  if (
-    query.afternoon &&
-    query.afternoon[0].name !== "" &&
-    query.afternoon[0].time !== ""
-  ) {
-    afternoon = [
-      {
-        type: "box",
-        layout: "horizontal",
-        contents: [
-          {
-            type: "text",
-            text: "下午場",
-            size: "sm",
-            color: "#555555",
-          },
-        ],
-      },
-    ];
-
-    query.afternoon.map((el) => {
-      if (!el.name && !el.time) return;
-
-      afternoon.push({
-        type: "box",
-        layout: "horizontal",
-        contents: [
-          {
-            type: "text",
-            text: el.name,
-            size: "sm",
-            color: "#555555",
-            flex: 0,
-          },
-          {
-            type: "text",
-            text: el.time,
-            size: "sm",
-            color: "#111111",
-            align: "end",
-          },
-        ],
-      });
-    });
-  }
-
   if (query.url) {
     // Avoid uri got multi-value
     footerContents.push({
@@ -347,14 +301,7 @@ export function activitySchedule(query: staffList): FlexBubble {
           layout: "vertical",
           margin: "xxl",
           spacing: "sm",
-          contents: [
-            ...(morning ? morning : undefined),
-            {
-              type: "separator",
-              margin: "xxl",
-            },
-            ...(afternoon ? afternoon : undefined),
-          ],
+          contents: [...(people ? people : undefined)],
         },
       ],
     },
