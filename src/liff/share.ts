@@ -10,7 +10,7 @@ import {
 export function shareController(req: Request, res: Response) {
   const query: any = req.query;
   let flex: any = {};
-  if (query.template === 1) {
+  if (query.template === "1") {
     const flexQuery: flexUrlTemplate = {
       title: query.title,
       place: query.place,
