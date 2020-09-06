@@ -30,14 +30,11 @@ const port: number = Number(PORT) || 5000;
 const corsOptions = {
   origin: [FRONTEND_DOMAIN || "*"],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-  allowedHeaders: ["Content-Type", "Authorization"],
 };
 console.log(corsOptions);
 
 app.use(cors(corsOptions));
-app.get("/liff/template", function (req, res) {
-  res.render("index");
-});
+
 app.get("/liff", (req: Request, res: Response) => {
   res.json({ liffId: CONCAT_ID });
 });
