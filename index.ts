@@ -28,10 +28,11 @@ const lineConfig: MiddlewareConfig = {
 };
 const port: number = Number(PORT) || 5000;
 const corsOptions = {
-  origin: FRONTEND_DOMAIN,
+  origin: [FRONTEND_DOMAIN || "*"],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
   allowedHeaders: ["Content-Type", "Authorization"],
 };
+console.log(corsOptions);
 
 app.use(cors(corsOptions));
 app.get("/liff/template", function (req, res) {
