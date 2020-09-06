@@ -9,6 +9,7 @@ import {
 export function shareController(req: Request, res: Response) {
   const query: any = req.query;
   let flex: any = {};
+  console.log(`Current template is: ${query.template}`);
   if (query.template === "1") {
     const flexQuery: flexUrlTemplate = {
       title: query.title,
@@ -35,8 +36,9 @@ export function shareController(req: Request, res: Response) {
   if (!flex) {
     flex = { type: "text", text: "Message" };
   }
-  res.render("share", {
+  console.log(`Flex Message: ${flex}`);
+  res.json({
     liffId: process.env.CONCAT_ID,
-    flex: JSON.stringify(flex),
+    flex,
   });
 }

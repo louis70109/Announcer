@@ -3,7 +3,7 @@ import { FlexCarousel } from "@line/bot-sdk";
 
 export function gaScreenView(
   name: string,
-  lineId: string = "Ud6ab866a67af711d594b12b0baffb8ac"
+  lineId: string = "Ud6ab0000000000000000000baffb8ac"
 ) {
   return `https://www.google-analytics.com/collect?${qs.stringify({
     an: "My App",

@@ -48,10 +48,7 @@ async function handleEvent(event: any) {
       activitySchedule(staffQuery),
     ])
   );
-  // create a echoing text message
-  const echo = { type: "text", text: event.message.text };
-
-  // use reply API
+  console.log(`Reply message: ${flex}`);
   return await client.replyMessage(event.replyToken, flex);
 }
 
