@@ -15,20 +15,14 @@ import { MiddlewareConfig } from "@line/bot-sdk/lib/types";
 import { shareController } from "./src/liff/share";
 import cors from "cors";
 
-const {
-  CHANNEL_SECRET,
-  CHANNEL_ACCESS_TOKEN,
-  CONCAT_ID,
-  PORT,
-  FRONTEND_DOMAIN,
-} = process.env;
+const { CHANNEL_SECRET, CHANNEL_ACCESS_TOKEN, CONCAT_ID, PORT } = process.env;
 const lineConfig: MiddlewareConfig = {
   channelAccessToken: CHANNEL_ACCESS_TOKEN || "",
   channelSecret: CHANNEL_SECRET || "",
 };
 const port: number = Number(PORT) || 5000;
 const corsOptions = {
-  origin: [FRONTEND_DOMAIN || "*"],
+  origin: "*",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
   allowedHeaders: ["Content-Type"],
 };
