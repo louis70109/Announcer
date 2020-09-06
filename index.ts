@@ -30,6 +30,7 @@ const port: number = Number(PORT) || 5000;
 const corsOptions = {
   origin: [FRONTEND_DOMAIN || "*"],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+  allowedHeaders: ["Content-Type"],
 };
 console.log(corsOptions);
 
