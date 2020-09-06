@@ -39,6 +39,6 @@ export function shareController(req: Request, res: Response) {
   console.log(`Flex Message: ${flex}`);
   res.json({
     liffId: process.env.CONCAT_ID,
-    flex,
+    flex: JSON.stringify(flex),
   });
 }
