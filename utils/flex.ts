@@ -1,5 +1,5 @@
 import { FlexMessage } from "@line/bot-sdk/lib/types";
-import { gaScreenView, jsonEscape } from "./common";
+import { gaScreenView } from "./common";
 import { flexUrlTemplate, staffList } from "../types/flexTemplate";
 import { FlexBubble } from "@line/bot-sdk";
 
@@ -161,9 +161,7 @@ export function generateFlex(
                 },
                 {
                   type: "text",
-                  text: liff
-                    ? jsonEscape(query.description)
-                    : query.description,
+                  text: query.description,
                   wrap: true,
                   color: "#666666",
                   size: "sm",
