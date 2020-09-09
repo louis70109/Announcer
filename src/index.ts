@@ -31,7 +31,7 @@ async function handleEvent(event: any) {
     activity: "活動",
   };
   const staffQuery: staffList = await {
-    title: "10/10 Title(尚未開放)",
+    title: "10/10 Title",
     place: "台北市內湖區瑞光路",
     map: `https://liff.line.me/${CONCAT_ID}/?template=2`,
     url: `https://liff.line.me/${CONCAT_ID}/?template=2`,
