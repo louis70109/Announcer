@@ -11,10 +11,7 @@ export function buildFlexContent(altText: string, contents: any): FlexMessage {
   };
 }
 0;
-export function generateFlex(
-  query: flexUrlTemplate,
-  liff: boolean = false
-): FlexBubble {
+export function generateFlex(query: flexUrlTemplate): FlexBubble {
   let footerContents: any = [],
     footer: any = {},
     hero: any = {};
@@ -36,7 +33,6 @@ export function generateFlex(
   }
 
   if (query.url) {
-    // Avoid uri got multi-value
     footerContents.push({
       type: "button",
       style: "primary",
@@ -251,7 +247,7 @@ export function activitySchedule(query: staffList): FlexBubble {
       },
     });
   }
-  if (footerContents) {
+  if (footerContents.indexOf() !== -1) {
     footer = {
       footer: {
         type: "box",
@@ -262,6 +258,7 @@ export function activitySchedule(query: staffList): FlexBubble {
       },
     };
   }
+
   return {
     type: "bubble",
     body: {
