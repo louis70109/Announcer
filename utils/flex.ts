@@ -247,7 +247,7 @@ export function activitySchedule(query: staffList): FlexBubble {
       },
     });
   }
-  if (footerContents.indexOf() !== -1) {
+  if (footerContents.length) {
     footer = {
       footer: {
         type: "box",
