@@ -14,6 +14,7 @@ import { Request, Response } from "express/index";
 import { MiddlewareConfig } from "@line/bot-sdk/lib/types";
 import { shareController } from "./src/liff/share";
 import cors from "cors";
+import { FlexResponse } from "./types/flexTemplate";
 
 const { CHANNEL_SECRET, CHANNEL_ACCESS_TOKEN, CONCAT_ID, PORT } = process.env;
 const lineConfig: MiddlewareConfig = {
@@ -24,18 +25,20 @@ const port: number = Number(PORT) || 5000;
 const corsOptions = {
   origin: "*",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-  allowedHeaders: ["Content-Type"],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
 };
-console.log(corsOptions);
+console.log("CORS setting: ", corsOptions);
 
 app.use(cors(corsOptions));
 
 app.get("/liff", (req: Request, res: Response) => {
   res.json({ liffId: CONCAT_ID });
 });
-app.get("/liff/share", (req: Request, res: Response) =>
-  shareController(req, res)
-);
+app.get("/liff/share", (req: Request, res: Response) => {
+  const data: FlexResponse = shareController(req);
+  res.json(data);
+});
 
 app.post(
   "/webhooks/line",

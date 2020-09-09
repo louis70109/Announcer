@@ -1,14 +1,19 @@
 import { Request, Response } from "express/index";
-import { flexUrlTemplate, staffList } from "../../types/flexTemplate";
+import {
+  flexUrlTemplate,
+  staffList,
+  FlexResponse,
+} from "../../types/flexTemplate";
 import {
   buildFlexContent,
   generateFlex,
   activitySchedule,
 } from "../../utils/flex";
 
-export function shareController(req: Request, res: Response) {
+export function shareController(req: Request): FlexResponse {
   const query: any = req.query;
   let flex: any = {};
+  console.log(query);
   console.log(`Current template is: ${query.template}`);
   if (query.template === "1") {
     const flexQuery: flexUrlTemplate = {
@@ -19,8 +24,8 @@ export function shareController(req: Request, res: Response) {
       description: query.desc,
       activity: query.activity,
     };
-    flex = buildFlexContent(query.title, generateFlex(flexQuery, true));
-  } else {
+    flex = buildFlexContent(query.title, generateFlex(flexQuery));
+  } else if (query.template === "2") {
     const staffQuery: staffList = {
       title: query.title,
       place: query.place,
@@ -29,16 +34,11 @@ export function shareController(req: Request, res: Response) {
       map: query.map,
       people: query.people,
     };
-
     flex = buildFlexContent(query.title, activitySchedule(staffQuery));
-  }
-  // use query.template to judge different template
-  if (!flex) {
-    flex = { type: "text", text: "Message" };
-  }
-  console.log(`Flex Message: ${flex}`);
-  res.json({
-    liffId: process.env.CONCAT_ID,
+  } else flex = { type: "text", text: "Message" };
+
+  return {
+    liffId: process.env.CONCAT_ID || "",
     flex: JSON.stringify(flex),
-  });
+  };
 }

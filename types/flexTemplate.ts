@@ -21,3 +21,8 @@ export interface staffList extends BaseInfo {
   activity: string;
   people?: Array<Staff>;
 }
+
+export type FlexResponse = {
+  liffId: string;
+  flex: string;
+};
