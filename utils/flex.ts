@@ -16,18 +16,13 @@ export function generateFlex(query: flexUrlTemplate): FlexBubble {
     footer: any = {},
     hero: any = {};
   if (query.imageUrl) {
-    // need to append to bubble object
     hero = {
       hero: {
         type: "image",
         url: query.imageUrl,
         size: "full",
-        aspectRatio: "20:13",
+        aspectRatio: "16:9",
         aspectMode: "cover",
-        action: {
-          type: "uri",
-          uri: query.imageUrl,
-        },
       },
     };
   }
