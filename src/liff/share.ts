@@ -21,6 +21,7 @@ export function shareController(req: Request): FlexResponse {
       place: query.place,
       time: query.time,
       url: query.url,
+      imageUrl: query.imageUrl,
       description: query.desc,
       activity: query.activity,
     };
