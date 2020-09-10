@@ -43,7 +43,9 @@ export function generateFlex(query: flexUrlTemplate): FlexBubble {
         uri: query.url,
       },
     });
+  }
 
+  if (footerContents.length) {
     footer = {
       footer: {
         type: "box",
@@ -54,7 +56,6 @@ export function generateFlex(query: flexUrlTemplate): FlexBubble {
       },
     };
   }
-
   return {
     type: "bubble",
     header: {
