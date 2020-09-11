@@ -14,14 +14,14 @@ const client = new Client({
   channelSecret: process.env.CHANNEL_SECRET || "",
 });
 const { CONCAT_ID } = process.env;
-async function handleEvent(event: any) {
+function handleEvent(event: any) {
   if (event.source.userId === "Udeadbeefdeadbeefdeadbeefdeadbeef") return; // webhook verify
 
   if (event.type !== "message" || event.message.type !== "text") {
     // ignore non-text-message event
     return Promise.resolve(null);
   }
-  const flexQuery: flexUrlTemplate = await {
+  const flexQuery: flexUrlTemplate = {
     title: "I am title",
     place: "@10-4",
     time: "10:30~11:00",
@@ -30,7 +30,7 @@ async function handleEvent(event: any) {
     description: "description",
     activity: "活動",
   };
-  const staffQuery: staffList = await {
+  const staffQuery: staffList = {
     title: "10/10 Title",
     place: "台北市內湖區瑞光路",
     map: `https://liff.line.me/${CONCAT_ID}/?template=2`,
@@ -41,7 +41,7 @@ async function handleEvent(event: any) {
       { name: "Boss", time: "11:00~12:00" },
     ],
   };
-  const flex: FlexMessage = await buildFlexContent(
+  const flex: FlexMessage = buildFlexContent(
     "測試數據",
     buildCarouselContent([
       generateFlex(flexQuery),
@@ -49,7 +49,7 @@ async function handleEvent(event: any) {
     ])
   );
   console.log(`Reply message: ${flex}`);
-  return await client.replyMessage(event.replyToken, flex);
+  return client.replyMessage(event.replyToken, flex);
 }
 
 export { handleEvent };
