@@ -14,7 +14,8 @@
     "url": "git+https://github.com/louis70109/Announcer.git"
   },
   "keywords": [
-    "liff"
+    "liff",
+    "LINE"
   ],
   "author": "NiJia",
   "license": "MIT",
@@ -29,7 +30,6 @@
     "@types/node": "^14.6.0",
     "cors": "^2.8.5",
     "cross-env": "^7.0.2",
-    "ejs": "^3.1.3",
     "express": "^4.17.1",
     "qs": "^6.9.4",
     "typescript": "^3.9.7"
