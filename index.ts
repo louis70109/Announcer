@@ -1,13 +1,6 @@
 import express from "express";
 const app = express();
-// app.engine("html", require("ejs").renderFile);
-app.set("view engine", "html");
-// app.set("views", __dirname + "/../views"); // production env
-app.use(express.static(__dirname + "/views"));
-if (process.env.NODE_ENV != "production") {
-  require("dotenv").config();
-  // app.set("views", __dirname + "/views");
-}
+if (process.env.NODE_ENV != "production") require("dotenv").config();
 import { middleware } from "@line/bot-sdk";
 import { handleEvent } from "./src/index";
 import { Request, Response } from "express/index";
