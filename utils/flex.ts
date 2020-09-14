@@ -10,7 +10,7 @@ export function buildFlexContent(altText: string, contents: any): FlexMessage {
     contents,
   };
 }
-0;
+
 export function generateFlex(query: flexUrlTemplate): FlexBubble {
   let footerContents: any = [],
     footer: any = {},
