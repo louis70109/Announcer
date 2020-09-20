@@ -18,7 +18,6 @@ export function gaScreenView(
     uid: lineId, // LINE userId
     ul: "zh-tw", // locale
     v: 1, // api version
-    z: +new Date(),
   })}`;
 }
 
