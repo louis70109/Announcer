@@ -26,3 +26,11 @@ export type FlexResponse = {
   liffId: string;
   flex: string;
 };
+
+export interface Card {
+  title: string;
+  description: string;
+  avatar?: string;
+  back?: string;
+  url?: string;
+}

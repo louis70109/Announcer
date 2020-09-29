@@ -1,6 +1,6 @@
 import { FlexMessage } from "@line/bot-sdk/lib/types";
 import { gaScreenView } from "./common";
-import { flexUrlTemplate, staffList } from "../types/flexTemplate";
+import { flexUrlTemplate, staffList, Card } from "../types/flexTemplate";
 import { FlexBubble } from "@line/bot-sdk";
 
 export function buildFlexContent(altText: string, contents: any): FlexMessage {
@@ -297,5 +297,149 @@ export function activitySchedule(query: staffList): FlexBubble {
       ],
     },
     ...(footer ? footer : undefined),
+  };
+}
+
+export function personalCard(person: Card): FlexBubble {
+  const avatar =
+      "https://stickershop.line-scdn.net/stickershop/v1/sticker/52002734/iPhone/sticker_key@2x.png",
+    back =
+      "https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip12.jpg",
+    url = "https://google.com";
+  return {
+    type: "bubble",
+    header: {
+      type: "box",
+      layout: "vertical",
+      contents: [
+        {
+          type: "image",
+          url: back
+            ? back
+            : "https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip11.jpg",
+          size: "full",
+          aspectRatio: "20:13",
+          aspectMode: "cover",
+        },
+        {
+          type: "box",
+          layout: "horizontal",
+          contents: [
+            {
+              type: "filler",
+            },
+            {
+              type: "box",
+              layout: "vertical",
+              contents: [
+                {
+                  type: "text",
+                  text: "follow",
+                  gravity: "center",
+                  flex: 1,
+                  align: "center",
+                  color: "#008f00",
+                },
+              ],
+              height: "30px",
+              borderColor: "#008f00",
+              borderWidth: "light",
+              cornerRadius: "20px",
+            },
+          ],
+          paddingAll: "5px",
+        },
+        {
+          type: "box",
+          layout: "horizontal",
+          contents: [
+            {
+              type: "box",
+              layout: "vertical",
+              contents: [
+                {
+                  type: "box",
+                  layout: "vertical",
+                  contents: [
+                    {
+                      type: "image",
+                      url: avatar
+                        ? avatar
+                        : "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png",
+                      aspectMode: "cover",
+                      size: "full",
+                    },
+                  ],
+                  cornerRadius: "100px",
+                },
+              ],
+              paddingAll: "3px",
+              backgroundColor: "#ffffff",
+              cornerRadius: "100px",
+              width: "30%",
+            },
+            {
+              type: "filler",
+            },
+          ],
+          position: "absolute",
+          offsetEnd: "0px",
+          offsetBottom: "0px",
+          offsetStart: "0px",
+          paddingStart: "10px",
+        },
+      ],
+      paddingAll: "0px",
+    },
+    body: {
+      type: "box",
+      layout: "vertical",
+      contents: [
+        {
+          type: "text",
+          text: person.title,
+          size: "lg",
+          weight: "bold",
+        },
+        {
+          type: "text",
+          text: person.description,
+          wrap: true,
+          size: "md",
+        },
+      ],
+      paddingTop: "23px",
+    },
+    footer: {
+      type: "box",
+      layout: "vertical",
+      contents: [
+        {
+          type: "box",
+          layout: "vertical",
+          contents: [
+            {
+              type: "text",
+              text: "View Details",
+              action: {
+                type: "uri",
+                label: "action",
+                uri: url,
+              },
+              color: "#42659a",
+              flex: 1,
+              gravity: "center",
+            },
+          ],
+          height: "30px",
+        },
+      ],
+      paddingAll: "13px",
+    },
+    styles: {
+      footer: {
+        separator: true,
+      },
+    },
   };
 }

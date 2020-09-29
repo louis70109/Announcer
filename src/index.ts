@@ -2,10 +2,11 @@ import {
   generateFlex,
   buildFlexContent,
   activitySchedule,
+  personalCard,
 } from "../utils/flex";
 import { Client } from "@line/bot-sdk";
 import { FlexMessage } from "@line/bot-sdk/lib/types";
-import { flexUrlTemplate, staffList } from "../types/flexTemplate";
+import { Card, flexUrlTemplate, staffList } from "../types/flexTemplate";
 import { buildCarouselContent } from "../utils/common";
 
 // create LINE SDK config from env variables
@@ -17,10 +18,6 @@ const { CONCAT_ID } = process.env;
 function handleEvent(event: any) {
   if (event.source.userId === "Udeadbeefdeadbeefdeadbeefdeadbeef") return; // webhook verify
 
-  if (event.type !== "message" || event.message.type !== "text") {
-    // ignore non-text-message event
-    return Promise.resolve(null);
-  }
   const flexQuery: flexUrlTemplate = {
     title: "I am title",
     place: "@10-4",
@@ -41,14 +38,20 @@ function handleEvent(event: any) {
       { name: "Boss", time: "11:00~12:00" },
     ],
   };
+  const person: Card = {
+    title: "NiJia(testing)",
+    description: "Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem ",
+    url: `https://liff.line.me/${CONCAT_ID}/?template=3`,
+  };
   const flex: FlexMessage = buildFlexContent(
     "測試數據",
     buildCarouselContent([
       generateFlex(flexQuery),
       activitySchedule(staffQuery),
+      personalCard(person),
     ])
   );
-  console.log(`Reply message: ${flex}`);
+  console.log(`Reply message: ${JSON.stringify(personalCard(person))}`);
   return client.replyMessage(event.replyToken, flex);
 }
 
