@@ -7,7 +7,9 @@ import { Client } from "@line/bot-sdk";
 import { FlexMessage } from "@line/bot-sdk/lib/types";
 import { flexUrlTemplate, staffList } from "../types/flexTemplate";
 import { buildCarouselContent } from "../utils/common";
-
+import "reflect-metadata";
+import { Notify } from "./entity/Notify";
+import { LineNotify } from "../types/notify";
 // create LINE SDK config from env variables
 const client = new Client({
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN || "",
@@ -52,4 +54,10 @@ function handleEvent(event: any) {
   return client.replyMessage(event.replyToken, flex);
 }
 
-export { handleEvent };
+async function createNotify(query: LineNotify): Promise<LineNotify> {
+  console.log("Inserting a new notify into the database...");
+  // use code to change token and save into db
+  return await Notify.findOrCreateBy(query);
+}
+
+export { handleEvent, createNotify };
