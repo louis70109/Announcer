@@ -36,7 +36,7 @@ test("It would build FlexMessage content", () => {
   expect(carousel).toBe(JSON.stringify(expected));
 });
 
-test("", () => {
+test("It should be activity flex message", () => {
   process.env.GA = "UA-123456789-0";
   const query: flexUrlTemplate = {
     title: "I am title",
@@ -54,7 +54,7 @@ test("", () => {
   expect(expected).toBe(JSON.stringify(flex));
 });
 
-test("", () => {
+test("It should be personal card", () => {
   const person: Card = {
     title: "NiJia(testing)",
     description: "Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem ",
