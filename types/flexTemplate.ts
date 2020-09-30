@@ -4,7 +4,7 @@ type BaseInfo = {
   url?: string;
 };
 
-export interface flexUrlTemplate extends BaseInfo {
+interface flexUrlTemplate extends BaseInfo {
   imageUrl?: string;
   time: string;
   description: string;
@@ -16,21 +16,23 @@ type Staff = {
   time: string;
 };
 
-export interface staffList extends BaseInfo {
+interface staffList extends BaseInfo {
   map?: string;
   activity: string;
   people?: Array<Staff>;
 }
 
-export type FlexResponse = {
+type FlexResponse = {
   liffId: string;
   flex: string;
 };
 
-export interface Card {
+interface Card {
   title: string;
   description: string;
   avatar?: string;
   back?: string;
   url?: string;
 }
+
+export { flexUrlTemplate, staffList, FlexResponse, Card };

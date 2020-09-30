@@ -3,7 +3,7 @@ import { gaScreenView } from "./common";
 import { flexUrlTemplate, staffList, Card } from "../types/flexTemplate";
 import { FlexBubble } from "@line/bot-sdk";
 
-export function buildFlexContent(altText: string, contents: any): FlexMessage {
+function buildFlexContent(altText: string, contents: any): FlexMessage {
   return {
     type: "flex",
     altText,
@@ -11,7 +11,7 @@ export function buildFlexContent(altText: string, contents: any): FlexMessage {
   };
 }
 
-export function generateFlex(query: flexUrlTemplate): FlexBubble {
+function generateFlex(query: flexUrlTemplate): FlexBubble {
   let footerContents: any = [],
     footer: any = {},
     hero: any = {};
@@ -169,7 +169,7 @@ export function generateFlex(query: flexUrlTemplate): FlexBubble {
   };
 }
 
-export function activitySchedule(query: staffList): FlexBubble {
+function activitySchedule(query: staffList): FlexBubble {
   let people: any = [],
     footerContents: any = [],
     footer: any = {};
@@ -300,7 +300,7 @@ export function activitySchedule(query: staffList): FlexBubble {
   };
 }
 
-export function personalCard(person: Card): FlexBubble {
+function personalCard(person: Card): FlexBubble {
   const avatar =
       "https://stickershop.line-scdn.net/stickershop/v1/sticker/52002734/iPhone/sticker_key@2x.png",
     back =
@@ -443,3 +443,5 @@ export function personalCard(person: Card): FlexBubble {
     },
   };
 }
+
+export { buildFlexContent, generateFlex, activitySchedule, personalCard };
