@@ -23,7 +23,6 @@ function generateFlex(query: flexUrlTemplate): FlexBubble {
         size: 'full',
         aspectRatio: '16:9',
         aspectMode: 'cover',
-        animated: true,
       },
     };
   }
