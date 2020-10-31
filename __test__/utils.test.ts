@@ -1,7 +1,12 @@
 import { buildCarouselContent } from '../utils/common';
-import { buildFlexContent, generateFlex, personalCard } from '../utils/flex';
+import {
+  activitySchedule,
+  buildFlexContent,
+  generateFlex,
+  personalCard,
+} from '../utils/flex';
 import { FlexCarousel, FlexMessage } from '@line/bot-sdk/dist/types';
-import { Card, flexUrlTemplate } from '../types/flexTemplate';
+import { Card, flexUrlTemplate, staffList } from '../types/flexTemplate';
 import { FlexBubble } from '@line/bot-sdk/lib/types';
 const OLD_ENV = process.env;
 beforeEach(() => {
@@ -64,5 +69,23 @@ test('It should be personal card', () => {
   const expected: string =
     '{"type":"bubble","header":{"type":"box","layout":"vertical","contents":[{"type":"image","url":"https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip12.jpg","size":"full","aspectRatio":"20:13","aspectMode":"cover"},{"type":"box","layout":"horizontal","contents":[{"type":"filler"},{"type":"box","layout":"vertical","contents":[{"type":"text","text":"follow","gravity":"center","flex":1,"align":"center","color":"#008f00"}],"height":"30px","borderColor":"#008f00","borderWidth":"light","cornerRadius":"20px"}],"paddingAll":"5px"},{"type":"box","layout":"horizontal","contents":[{"type":"box","layout":"vertical","contents":[{"type":"box","layout":"vertical","contents":[{"type":"image","url":"https://stickershop.line-scdn.net/stickershop/v1/sticker/52002734/iPhone/sticker_key@2x.png","aspectMode":"cover","size":"full"}],"cornerRadius":"100px"}],"paddingAll":"3px","backgroundColor":"#ffffff","cornerRadius":"100px","width":"30%"},{"type":"filler"}],"position":"absolute","offsetEnd":"0px","offsetBottom":"0px","offsetStart":"0px","paddingStart":"10px"}],"paddingAll":"0px"},"body":{"type":"box","layout":"vertical","contents":[{"type":"text","text":"NiJia(testing)","size":"lg","weight":"bold"},{"type":"text","text":"Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem ","wrap":true,"size":"md"}],"paddingTop":"23px"},"footer":{"type":"box","layout":"vertical","contents":[{"type":"box","layout":"vertical","contents":[{"type":"text","text":"View Details","action":{"type":"uri","label":"action","uri":"https://google.com"},"color":"#42659a","flex":1,"gravity":"center"}],"height":"30px"}],"paddingAll":"13px"},"styles":{"footer":{"separator":true}}}';
 
+  expect(expected).toBe(JSON.stringify(flex));
+});
+
+test('It should be activity schedule function', () => {
+  const staffQuery: staffList = {
+    title: '10/10 Title',
+    place: '台北市內湖區瑞光路',
+    map: 'https://liff.line.me/abc12345/?template=2',
+    url: 'https://liff.line.me/abcdef123/?template=2',
+    activity: '參與名單',
+    people: [
+      { name: 'Moon', time: '10:00~12:00' },
+      { name: 'Boss', time: '11:00~12:00' },
+    ],
+  };
+  const flex: FlexBubble = activitySchedule(staffQuery);
+  const expected: string =
+    '{"type":"bubble","body":{"type":"box","layout":"vertical","contents":[{"type":"text","text":"參與名單","weight":"bold","color":"#1DB446","size":"sm"},{"type":"text","text":"10/10 Title","weight":"bold","size":"xxl","margin":"md","wrap":true},{"type":"text","text":"台北市內湖區瑞光路","size":"xs","color":"#aaaaaa","wrap":true},{"type":"separator","margin":"xxl"},{"type":"box","layout":"vertical","margin":"xxl","spacing":"sm","contents":[{"type":"box","layout":"horizontal","contents":[{"type":"text","text":"名單","size":"sm","color":"#555555","flex":0}]},{"type":"box","layout":"horizontal","contents":[{"type":"text","text":"Moon","size":"sm","color":"#555555","flex":0},{"type":"text","text":"10:00~12:00","size":"sm","color":"#111111","align":"end"}]},{"type":"box","layout":"horizontal","contents":[{"type":"text","text":"Boss","size":"sm","color":"#555555","flex":0},{"type":"text","text":"11:00~12:00","size":"sm","color":"#111111","align":"end"}]}]}]},"footer":{"type":"box","layout":"vertical","spacing":"sm","contents":[{"type":"button","style":"primary","height":"sm","action":{"type":"uri","label":"參考連結","uri":"https://liff.line.me/abcdef123/?template=2"}},{"type":"button","action":{"type":"uri","label":"地圖","uri":"https://liff.line.me/abc12345/?template=2"}}],"flex":0}}';
   expect(expected).toBe(JSON.stringify(flex));
 });
