@@ -27,6 +27,33 @@ type FlexResponse = {
   flex: string;
 };
 
+type Hero = {
+  type: string;
+  url: string;
+  size: string;
+  aspectRatio: string;
+  aspectMode: string;
+};
+
+type PrimaryButton = {
+  type: string;
+  style?: string;
+  height?: string;
+  action: {
+    type: string;
+    label: string;
+    uri: string;
+  };
+};
+
+type Footer = {
+  type: string;
+  layout: string;
+  spacing: string;
+  contents: Array<PrimaryButton>;
+  flex: number;
+};
+
 interface Card {
   title: string;
   description: string;
@@ -35,4 +62,12 @@ interface Card {
   url?: string;
 }
 
-export { flexUrlTemplate, staffList, FlexResponse, Card };
+export {
+  flexUrlTemplate,
+  staffList,
+  FlexResponse,
+  Card,
+  Hero,
+  Footer,
+  PrimaryButton,
+};

@@ -1,6 +1,13 @@
 import { FlexMessage } from '@line/bot-sdk/lib/types';
 import { gaScreenView } from './common';
-import { flexUrlTemplate, staffList, Card } from '../types/flexTemplate';
+import {
+  flexUrlTemplate,
+  staffList,
+  Card,
+  Hero,
+  Footer,
+  PrimaryButton,
+} from '../types/flexTemplate';
 import { FlexBubble } from '@line/bot-sdk';
 
 function buildFlexContent(altText: string, contents: any): FlexMessage {
@@ -12,19 +19,18 @@ function buildFlexContent(altText: string, contents: any): FlexMessage {
 }
 
 function generateFlex(query: flexUrlTemplate): FlexBubble {
-  let footerContents: any = [],
-    footer: any = {},
-    hero: any = {};
+  let footerContents: Array<PrimaryButton> = [],
+    bottom: any = {},
+    header: any = {};
   if (query.imageUrl) {
-    hero = {
-      hero: {
-        type: 'image',
-        url: query.imageUrl,
-        size: 'full',
-        aspectRatio: '16:9',
-        aspectMode: 'cover',
-      },
+    const hero: Hero = {
+      type: 'image',
+      url: query.imageUrl,
+      size: 'full',
+      aspectRatio: '16:9',
+      aspectMode: 'cover',
     };
+    header = { hero };
   }
 
   if (query.url) {
@@ -41,15 +47,14 @@ function generateFlex(query: flexUrlTemplate): FlexBubble {
   }
 
   if (footerContents.length) {
-    footer = {
-      footer: {
-        type: 'box',
-        layout: 'vertical',
-        spacing: 'sm',
-        contents: footerContents,
-        flex: 0,
-      },
+    const footer: Footer = {
+      type: 'box',
+      layout: 'vertical',
+      spacing: 'sm',
+      contents: footerContents,
+      flex: 0,
     };
+    bottom = { footer };
   }
   return {
     type: 'bubble',
@@ -69,7 +74,7 @@ function generateFlex(query: flexUrlTemplate): FlexBubble {
         },
       ],
     },
-    ...(hero ? hero : undefined),
+    ...(header ? header : undefined),
     body: {
       type: 'box',
       layout: 'vertical',
@@ -165,14 +170,14 @@ function generateFlex(query: flexUrlTemplate): FlexBubble {
         },
       ],
     },
-    ...(footer ? footer : undefined),
+    ...(bottom ? bottom : undefined),
   };
 }
 
 function activitySchedule(query: staffList): FlexBubble {
   let people: any = [],
-    footerContents: any = [],
-    footer: any = {};
+    footerContents: Array<PrimaryButton> = [],
+    bottom: any = {};
 
   //Hard fix
   if (
@@ -244,15 +249,14 @@ function activitySchedule(query: staffList): FlexBubble {
     });
   }
   if (footerContents.length) {
-    footer = {
-      footer: {
-        type: 'box',
-        layout: 'vertical',
-        spacing: 'sm',
-        contents: footerContents,
-        flex: 0,
-      },
+    const footer: Footer = {
+      type: 'box',
+      layout: 'vertical',
+      spacing: 'sm',
+      contents: footerContents,
+      flex: 0,
     };
+    bottom = { footer };
   }
 
   return {
@@ -296,7 +300,7 @@ function activitySchedule(query: staffList): FlexBubble {
         },
       ],
     },
-    ...(footer ? footer : undefined),
+    ...(bottom ? bottom : undefined),
   };
 }
 
