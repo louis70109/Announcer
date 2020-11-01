@@ -1,14 +1,7 @@
 import { FlexMessage } from '@line/bot-sdk/lib/types';
 import { gaScreenView } from './common';
-import {
-  flexUrlTemplate,
-  staffList,
-  Card,
-  Hero,
-  Footer,
-  PrimaryButton,
-} from '../types/flexTemplate';
-import { FlexBubble } from '@line/bot-sdk';
+import { flexUrlTemplate, staffList, Card, Hero } from '../types/flexTemplate';
+import { FlexBubble, FlexComponent } from '@line/bot-sdk';
 
 function buildFlexContent(altText: string, contents: any): FlexMessage {
   return {
@@ -19,8 +12,7 @@ function buildFlexContent(altText: string, contents: any): FlexMessage {
 }
 
 function generateFlex(query: flexUrlTemplate): FlexBubble {
-  let footerContents: Array<PrimaryButton> = [],
-    bottom: any = {},
+  let footerContents: FlexComponent[] = [],
     header: any = {};
   if (query.imageUrl) {
     const hero: Hero = {
@@ -46,16 +38,6 @@ function generateFlex(query: flexUrlTemplate): FlexBubble {
     });
   }
 
-  if (footerContents.length) {
-    const footer: Footer = {
-      type: 'box',
-      layout: 'vertical',
-      spacing: 'sm',
-      contents: footerContents,
-      flex: 0,
-    };
-    bottom = { footer };
-  }
   return {
     type: 'bubble',
     header: {
@@ -170,14 +152,19 @@ function generateFlex(query: flexUrlTemplate): FlexBubble {
         },
       ],
     },
-    ...(bottom ? bottom : undefined),
+    footer: {
+      type: 'box',
+      layout: 'vertical',
+      spacing: 'sm',
+      contents: footerContents,
+      flex: 0,
+    },
   };
 }
 
 function activitySchedule(query: staffList): FlexBubble {
   let people: any = [],
-    footerContents: Array<PrimaryButton> = [],
-    bottom: any = {};
+    footerContents: FlexComponent[] = [];
 
   //Hard fix
   if (
@@ -248,16 +235,6 @@ function activitySchedule(query: staffList): FlexBubble {
       },
     });
   }
-  if (footerContents.length) {
-    const footer: Footer = {
-      type: 'box',
-      layout: 'vertical',
-      spacing: 'sm',
-      contents: footerContents,
-      flex: 0,
-    };
-    bottom = { footer };
-  }
 
   return {
     type: 'bubble',
@@ -300,7 +277,13 @@ function activitySchedule(query: staffList): FlexBubble {
         },
       ],
     },
-    ...(bottom ? bottom : undefined),
+    footer: {
+      type: 'box',
+      layout: 'vertical',
+      spacing: 'sm',
+      contents: footerContents,
+      flex: 0,
+    },
   };
 }
 
