@@ -39,7 +39,7 @@ function handleEvent(event: any) {
     ],
   };
   const person: Card = {
-    title: 'NiJia(testing)',
+    title: 'Announcer',
     description: 'Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem ',
     followUrl: `https://liff.line.me/${CONCAT_ID}/?template=3`,
     back:
