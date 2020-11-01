@@ -209,7 +209,11 @@ test('It should be personal card', () => {
   const person: Card = {
     title: 'NiJia(testing)',
     description: 'Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem ',
-    url: 'https://google.com',
+    back:
+      'https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip12.jpg',
+    followUrl: 'https://developers.line.biz/en/news/',
+    avatar:
+      'https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png',
   };
   const flex: FlexBubble = personalCard(person);
   const expected: any = {
@@ -242,6 +246,11 @@ test('It should be personal card', () => {
                   flex: 1,
                   align: 'center',
                   color: '#008f00',
+                  action: {
+                    type: 'uri',
+                    label: 'action',
+                    uri: 'https://developers.line.biz/en/news/',
+                  },
                 },
               ],
               height: '30px',
@@ -267,7 +276,7 @@ test('It should be personal card', () => {
                     {
                       type: 'image',
                       url:
-                        'https://stickershop.line-scdn.net/stickershop/v1/sticker/52002734/iPhone/sticker_key@2x.png',
+                        'https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png',
                       aspectMode: 'cover',
                       size: 'full',
                     },
@@ -301,37 +310,11 @@ test('It should be personal card', () => {
           text: 'Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem ',
           wrap: true,
           size: 'md',
+          margin: 'xs',
         },
       ],
-      paddingTop: '23px',
+      paddingTop: '10px',
     },
-    footer: {
-      type: 'box',
-      layout: 'vertical',
-      contents: [
-        {
-          type: 'box',
-          layout: 'vertical',
-          contents: [
-            {
-              type: 'text',
-              text: 'View Details',
-              action: {
-                type: 'uri',
-                label: 'action',
-                uri: 'https://google.com',
-              },
-              color: '#42659a',
-              flex: 1,
-              gravity: 'center',
-            },
-          ],
-          height: '30px',
-        },
-      ],
-      paddingAll: '13px',
-    },
-    styles: { footer: { separator: true } },
   };
   compareTwoDictionary(expected, flex);
 });
