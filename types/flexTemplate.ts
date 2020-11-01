@@ -35,12 +35,12 @@ type Hero = {
   aspectMode: string;
 };
 
-interface Card {
+type Card = {
   title: string;
   description: string;
-  avatar?: string;
-  back?: string;
-  url?: string;
-}
+  avatar: string;
+  back: string;
+  followUrl: string;
+};
 
 export { flexUrlTemplate, staffList, FlexResponse, Card, Hero };

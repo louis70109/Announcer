@@ -288,11 +288,15 @@ function activitySchedule(query: staffList): FlexBubble {
 }
 
 function personalCard(person: Card): FlexBubble {
-  const avatar =
-      'https://stickershop.line-scdn.net/stickershop/v1/sticker/52002734/iPhone/sticker_key@2x.png',
-    back =
-      'https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip12.jpg',
-    url = 'https://google.com';
+  const back = person.back
+      ? person.back
+      : 'https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip11.jpg',
+    avatar = person.avatar
+      ? person.avatar
+      : 'https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png',
+    followUrl = person.followUrl
+      ? person.followUrl
+      : 'https://developers.line.biz/en/news/';
   return {
     type: 'bubble',
     header: {
@@ -301,9 +305,7 @@ function personalCard(person: Card): FlexBubble {
       contents: [
         {
           type: 'image',
-          url: back
-            ? back
-            : 'https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip11.jpg',
+          url: back,
           size: 'full',
           aspectRatio: '20:13',
           aspectMode: 'cover',
@@ -326,6 +328,11 @@ function personalCard(person: Card): FlexBubble {
                   flex: 1,
                   align: 'center',
                   color: '#008f00',
+                  action: {
+                    type: 'uri',
+                    label: 'action',
+                    uri: followUrl,
+                  },
                 },
               ],
               height: '30px',
@@ -350,9 +357,7 @@ function personalCard(person: Card): FlexBubble {
                   contents: [
                     {
                       type: 'image',
-                      url: avatar
-                        ? avatar
-                        : 'https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png',
+                      url: avatar,
                       aspectMode: 'cover',
                       size: 'full',
                     },
@@ -393,40 +398,10 @@ function personalCard(person: Card): FlexBubble {
           text: person.description,
           wrap: true,
           size: 'md',
+          margin: 'xs',
         },
       ],
-      paddingTop: '23px',
-    },
-    footer: {
-      type: 'box',
-      layout: 'vertical',
-      contents: [
-        {
-          type: 'box',
-          layout: 'vertical',
-          contents: [
-            {
-              type: 'text',
-              text: 'View Details',
-              action: {
-                type: 'uri',
-                label: 'action',
-                uri: url,
-              },
-              color: '#42659a',
-              flex: 1,
-              gravity: 'center',
-            },
-          ],
-          height: '30px',
-        },
-      ],
-      paddingAll: '13px',
-    },
-    styles: {
-      footer: {
-        separator: true,
-      },
+      paddingTop: '10px',
     },
   };
 }
