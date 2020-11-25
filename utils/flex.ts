@@ -1,4 +1,4 @@
-import { FlexMessage } from '@line/bot-sdk/lib/types';
+import { FlexBox, FlexMessage } from '@line/bot-sdk/lib/types';
 import { gaScreenView } from './common';
 import { flexUrlTemplate, staffList, Card, Hero } from '../types/flexTemplate';
 import { FlexBubble, FlexComponent } from '@line/bot-sdk';
@@ -163,7 +163,7 @@ function generateFlex(query: flexUrlTemplate): FlexBubble {
 }
 
 function activitySchedule(query: staffList): FlexBubble {
-  let people: any = [],
+  let people: FlexBox[] = [],
     footerContents: FlexComponent[] = [];
 
   //Hard fix
@@ -273,7 +273,7 @@ function activitySchedule(query: staffList): FlexBubble {
           layout: 'vertical',
           margin: 'xxl',
           spacing: 'sm',
-          contents: [...(people ? people : undefined)],
+          contents: people,
         },
       ],
     },
@@ -288,15 +288,9 @@ function activitySchedule(query: staffList): FlexBubble {
 }
 
 function personalCard(person: Card): FlexBubble {
-  const back = person.back
-      ? person.back
-      : 'https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip11.jpg',
-    avatar = person.avatar
-      ? person.avatar
-      : 'https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png',
-    followUrl = person.followUrl
-      ? person.followUrl
-      : 'https://developers.line.biz/en/news/';
+  const back = person.back,
+    avatar = person.avatar,
+    followUrl = person.followUrl;
   return {
     type: 'bubble',
     header: {

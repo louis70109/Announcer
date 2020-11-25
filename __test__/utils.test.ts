@@ -453,3 +453,80 @@ test('It should be activity schedule function', () => {
   };
   compareTwoDictionary(expected, flex);
 });
+
+test('It should be activity schedule function but 名單 would be empty', () => {
+  const staffQuery: staffList = {
+    title: '10/10 Title',
+    place: '台北市內湖區瑞光路',
+    map: 'https://liff.line.me/abc12345/?template=2',
+    url: 'https://liff.line.me/abcdef123/?template=2',
+    activity: '參與名單',
+  };
+  const flex: FlexBubble = activitySchedule(staffQuery);
+  const expected: any = {
+    type: 'bubble',
+    body: {
+      type: 'box',
+      layout: 'vertical',
+      contents: [
+        {
+          type: 'text',
+          text: '參與名單',
+          weight: 'bold',
+          color: '#1DB446',
+          size: 'sm',
+        },
+        {
+          type: 'text',
+          text: '10/10 Title',
+          weight: 'bold',
+          size: 'xxl',
+          margin: 'md',
+          wrap: true,
+        },
+        {
+          type: 'text',
+          text: '台北市內湖區瑞光路',
+          size: 'xs',
+          color: '#aaaaaa',
+          wrap: true,
+        },
+        { type: 'separator', margin: 'xxl' },
+        {
+          type: 'box',
+          layout: 'vertical',
+          margin: 'xxl',
+          spacing: 'sm',
+          contents: [],
+        },
+      ],
+    },
+    footer: {
+      type: 'box',
+      layout: 'vertical',
+      spacing: 'sm',
+      contents: [
+        {
+          type: 'button',
+          style: 'primary',
+          height: 'sm',
+          action: {
+            type: 'uri',
+            label: '參考連結',
+            uri: 'https://liff.line.me/abcdef123/?template=2',
+          },
+        },
+        {
+          type: 'button',
+          action: {
+            type: 'uri',
+            label: '地圖',
+            uri: 'https://liff.line.me/abc12345/?template=2',
+          },
+        },
+      ],
+      flex: 0,
+    },
+  };
+  compareTwoDictionary(expected, flex);
+});

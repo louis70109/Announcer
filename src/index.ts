@@ -56,7 +56,6 @@ function handleEvent(event: any) {
     ])
   );
 
-  console.log(`Reply message: ${JSON.stringify(personalCard(person))}`);
   return client.replyMessage(event.replyToken, flex);
 }
 
