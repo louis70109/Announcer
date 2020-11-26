@@ -45,7 +45,7 @@ test('It would build FlexMessage content', () => {
   compareTwoDictionary(expected, carousel);
 });
 
-test('It should be activity flex message', () => {
+test('It should be activity flex message(fully params)', () => {
   process.env.GA = 'UA-123456789-0';
   const query: flexUrlTemplate = {
     title: 'I am title',
@@ -205,7 +205,7 @@ test('It should be activity flex message', () => {
   compareTwoDictionary(expected, flex);
 });
 
-test('It should be personal card', () => {
+test('It should be personal card(fully params)', () => {
   const person: Card = {
     title: 'NiJia(testing)',
     description: 'Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem ',
@@ -319,7 +319,7 @@ test('It should be personal card', () => {
   compareTwoDictionary(expected, flex);
 });
 
-test('It should be activity schedule function', () => {
+test('It should be fully params activitySchedule function', () => {
   const staffQuery: staffList = {
     title: '10/10 Title',
     place: '台北市內湖區瑞光路',
@@ -454,12 +454,10 @@ test('It should be activity schedule function', () => {
   compareTwoDictionary(expected, flex);
 });
 
-test('It should be activity schedule function but 名單 would be empty', () => {
+test('It should be activity schedule function but 名單, 參考連結 and 地圖 are empty', () => {
   const staffQuery: staffList = {
     title: '10/10 Title',
     place: '台北市內湖區瑞光路',
-    map: 'https://liff.line.me/abc12345/?template=2',
-    url: 'https://liff.line.me/abcdef123/?template=2',
     activity: '參與名單',
   };
   const flex: FlexBubble = activitySchedule(staffQuery);
@@ -505,26 +503,7 @@ test('It should be activity schedule function but 名單 would be empty', () => 
       type: 'box',
       layout: 'vertical',
       spacing: 'sm',
-      contents: [
-        {
-          type: 'button',
-          style: 'primary',
-          height: 'sm',
-          action: {
-            type: 'uri',
-            label: '參考連結',
-            uri: 'https://liff.line.me/abcdef123/?template=2',
-          },
-        },
-        {
-          type: 'button',
-          action: {
-            type: 'uri',
-            label: '地圖',
-            uri: 'https://liff.line.me/abc12345/?template=2',
-          },
-        },
-      ],
+      contents: [],
       flex: 0,
     },
   };
