@@ -1,4 +1,4 @@
-import { Request, Response } from 'express/index';
+import { Request } from 'express/index';
 import {
   flexUrlTemplate,
   staffList,
