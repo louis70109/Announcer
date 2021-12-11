@@ -26,8 +26,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
       env:
           API_ENV: 'testing'
-          LINE_CHANNEL_ACCESS_TOKEN: ${LINE_CHANNEL_ACCESS_TOKEN}
-          LINE_CHANNEL_SECRET: ${LINE_CHANNEL_SECRET}
+          CHANNEL_ACCESS_TOKEN: ${CHANNEL_ACCESS_TOKEN}
+          CHANNEL_SECRET: ${CHANNEL_SECRET}
     - run: npm install
     - run: npm test
 
