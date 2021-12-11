@@ -24,6 +24,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+      env:
+          API_ENV: 'testing'
+          LINE_CHANNEL_ACCESS_TOKEN: ${LINE_CHANNEL_ACCESS_TOKEN}
+          LINE_CHANNEL_SECRET: ${LINE_CHANNEL_SECRET}
     - run: npm install
     - run: npm test
 
