@@ -1,6 +1,6 @@
 import express from 'express'
 const app = express()
-if (process.env.NODE_ENV != ('production'|| 'testing')) require('dotenv').config()
+if (process.env.NODE_ENV === 'develop') require('dotenv').config()
 import { middleware } from '@line/bot-sdk'
 import { handleEvent } from './src/index'
 import { Request, Response } from 'express/index'
