@@ -46,9 +46,9 @@ heroku logs --tail -a YOUR_HEROKU_NAME
 - Input channel information.
 - Copy `Channel secret` and `Channel access token` to environment `CHANNEL_ACCESS_TOKEN` and `CHANNEL_SECRET` variables.
 
-# Local testing
+# Local test with Chatbot & API
 
-1. first terminal window
+## 1. first terminal window
 
 ```
 cp .env.sample .env
@@ -56,7 +56,7 @@ npm install
 npm run dev
 ```
 
-2. Create a provisional https:
+## 2. Create a provisional https:
 
 ```
 npx ngrok http 5000
@@ -64,15 +64,24 @@ npx ngrok http 5000
 
 ![](https://i.imgur.com/azVdG8j.png)
 
-3. Copy url to Messaging API and LIFF endpoint url.
+## 3. Copy url to Messaging API and LIFF endpoint url.
 
-4. Use following command before deploy:
+## 4. Use following command before deploy:
 
 ```
 npm run build
 ```
 
 > This command will compile typescript to javascript file in `dist/`.
+
+
+## 5. Local Unit/Integration Test
+
+If you use `.env` to develop this project(contain LINE Bot token), can use following command:
+
+```
+export NODE_NEV=develop ; npm run test
+```
 
 # License
 
