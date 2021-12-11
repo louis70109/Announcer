@@ -32,5 +32,3 @@ jobs:
         run: |
            npm install
            npm run test
-           npm test
-
