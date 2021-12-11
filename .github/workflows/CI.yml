@@ -25,7 +25,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
       env:
-          API_ENV: 'testing'
+          NODE_ENV: 'testing'
           CHANNEL_ACCESS_TOKEN: ${CHANNEL_ACCESS_TOKEN}
           CHANNEL_SECRET: ${CHANNEL_SECRET}
     - run: npm install
