@@ -84,6 +84,11 @@ npm run test
 ```
 
 - If you installed [act](https://github.com/nektos/act) locally, run `act` to check GitHub Actions status.
+
+# Expect
+
+![](https://github.com/louis70109/Announcer/blob/7958ba589901987642500e0a3b1f94c79de769c4/http_request.png)
+
 # License
 
 MIT License
