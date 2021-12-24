@@ -80,9 +80,10 @@ npm run build
 If you use `.env` to develop this project(contain LINE Bot token), can use following command:
 
 ```
-export NODE_NEV=develop ; npm run test
+npm run test
 ```
 
+- If you installed [act](https://github.com/nektos/act) locally, run `act` to check GitHub Actions status.
 # License
 
 MIT License
