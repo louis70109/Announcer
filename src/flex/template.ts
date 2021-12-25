@@ -1,18 +1,8 @@
+import { Card, FlexResponse, flexUrlTemplate, staffList } from '../../types/flexTemplate';
+import { activitySchedule, buildFlexContent, generateFlex, personalCard } from '../../utils/flex';
 import { Request } from 'express/index';
-import {
-  flexUrlTemplate,
-  staffList,
-  FlexResponse,
-  Card,
-} from '../../types/flexTemplate';
-import {
-  buildFlexContent,
-  generateFlex,
-  activitySchedule,
-  personalCard,
-} from '../../utils/flex';
 
-export function shareController(req: Request): FlexResponse {
+export function flexController(req: Request): FlexResponse {
   const query: any = req.query;
   let flex: any = {};
   console.log(query);
@@ -50,7 +40,6 @@ export function shareController(req: Request): FlexResponse {
   } else flex = { type: 'text', text: 'Message' };
 
   return {
-    liffId: process.env.CONCAT_ID || '',
     flex: JSON.stringify(flex),
   };
 }

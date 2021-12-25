@@ -5,7 +5,7 @@ import { middleware } from '@line/bot-sdk'
 import { handleEvent } from './src/index'
 import { Request, Response } from 'express/index'
 import { MiddlewareConfig } from '@line/bot-sdk/lib/types'
-import { shareController } from './src/liff/share'
+import { flexController } from './src/flex/template'
 import cors from 'cors'
 import { FlexResponse } from './types/flexTemplate'
 
@@ -16,7 +16,7 @@ const lineConfig: MiddlewareConfig = {
 }
 const corsOptions = {
   origin: '*',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  methods: 'GET,POST,DELETE,OPTIONS',
   preflightContinue: false,
   optionsSuccessStatus: 204,
 }
@@ -30,9 +30,14 @@ app.get('/', (req: Request, res: Response) => {
 app.get('/liff', (req: Request, res: Response) => {
   res.json({ liffId: CONCAT_ID })
 })
+
 app.get('/liff/share', (req: Request, res: Response) => {
-  const data: FlexResponse = shareController(req)
-  res.json(data)
+  const data: FlexResponse = flexController(req)
+
+  res.json({
+    // liffId: CONCAT_ID || '',
+    data,
+  })
 })
 
 app.post('/webhooks/line', middleware(lineConfig), (req: Request, res: Response) => {

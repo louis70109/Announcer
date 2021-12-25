@@ -87,7 +87,39 @@ npm run test
 
 # Expect
 
-![](https://github.com/louis70109/Announcer/blob/7958ba589901987642500e0a3b1f94c79de769c4/http_request.png)
+![](https://github.com/louis70109/Announcer/blob/7958ba589901987642500e0a3b1f94c79de769c4/readme_img/http_request.png)
+
+```javascript
+// query.template === '1'
+{
+    title: 'Title',
+    place: 'location',
+    time: '12/26 15:00',
+    url: 'HTTP string',
+    imageUrl: 'HTTP string',
+    description: 'aaa\nbbb\nccc',
+    activity: 'some tag',
+};
+flex = buildFlexContent(query.title, generateFlex(flexQuery));
+// query.template === '2'
+const staffQuery: staffList = {
+  title: query.title,
+  place: query.place,
+  url: query.url,
+  activity: query.activity,
+  map: query.map,
+  people: query.people,
+};
+flex = buildFlexContent(query.title, activitySchedule(staffQuery));
+// query.template === '3'
+const staffQuery: Card = {
+  title: query.title,
+  description: query.description,
+  avatar: query.avatar,
+  back: query.back,
+  followUrl: query.followUrl,
+};
+```
 
 # License
 

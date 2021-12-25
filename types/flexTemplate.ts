@@ -23,7 +23,6 @@ interface staffList extends BaseInfo {
 }
 
 type FlexResponse = {
-  liffId: string;
   flex: string;
 };
 
