@@ -33,11 +33,7 @@ app.get('/liff', (req: Request, res: Response) => {
 
 app.get('/liff/share', (req: Request, res: Response) => {
   const data: FlexResponse = flexController(req)
-
-  res.json(
-    // liffId: CONCAT_ID || '',
-    data
-  )
+  res.json(data)
 })
 
 app.post('/webhooks/line', middleware(lineConfig), (req: Request, res: Response) => {
