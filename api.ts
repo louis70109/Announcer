@@ -20,7 +20,6 @@ const corsOptions = {
   preflightContinue: false,
   optionsSuccessStatus: 204,
 }
-// console.log('CORS setting: ', corsOptions)
 
 app.use(cors(corsOptions))
 

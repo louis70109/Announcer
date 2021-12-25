@@ -87,7 +87,7 @@ npm run test
 
 # Expect
 
-![](https://github.com/louis70109/Announcer/blob/7958ba589901987642500e0a3b1f94c79de769c4/readme_img/http_request.png)
+![](https://github.com/louis70109/Announcer/blob/463868113c4710cdeca16a1a728fdc1fa7fb8ac9/readme_img/http_request.png)
 
 ```javascript
 // query.template === '1'
@@ -118,6 +118,14 @@ const staffQuery: Card = {
   avatar: query.avatar,
   back: query.back,
   followUrl: query.followUrl,
+};
+```
+
+Above template would response following type:
+
+```
+type FlexResponse = {
+  flex: string;
 };
 ```
 
