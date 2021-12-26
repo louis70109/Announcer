@@ -92,6 +92,7 @@ npm run test
 ```javascript
 // query.template === '1'
 {
+    template: '1',
     title: 'Title',
     place: 'location',
     time: '12/26 15:00',
@@ -100,24 +101,25 @@ npm run test
     description: 'aaa\nbbb\nccc',
     activity: 'some tag',
 };
-flex = buildFlexContent(query.title, generateFlex(flexQuery));
+
 // query.template === '2'
-const staffQuery: staffList = {
-  title: query.title,
-  place: query.place,
-  url: query.url,
-  activity: query.activity,
-  map: query.map,
-  people: query.people,
+staffList = {
+  template: '2',
+  title: 'title',
+  place: 'here',
+  url: 'HTTP link',
+  activity: 'tag',
+  map: 'Google Map link',
+  people: [{name: 'NiJia', time: '10:00~12:00'}],
 };
-flex = buildFlexContent(query.title, activitySchedule(staffQuery));
 // query.template === '3'
-const staffQuery: Card = {
-  title: query.title,
-  description: query.description,
-  avatar: query.avatar,
-  back: query.back,
-  followUrl: query.followUrl,
+Card = {
+  template: '2',
+  title: 'title',
+  description: 'aaa\nbbb',
+  avatar: 'HTTP link',
+  back: 'HTTP image background link',
+  followUrl: 'HTTP link',
 };
 ```
 
