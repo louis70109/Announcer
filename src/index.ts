@@ -5,7 +5,7 @@ import {
   personalCard,
 } from '../utils/flex';
 import { Client } from '@line/bot-sdk';
-import { FlexMessage } from '@line/bot-sdk/lib/types';
+import { FlexMessage, TextMessage } from '@line/bot-sdk/lib/types';
 import { Card, flexUrlTemplate, staffList } from '../types/flexTemplate';
 import { buildCarouselContent } from '../utils/common';
 
@@ -56,7 +56,8 @@ function handleEvent(event: any) {
     ])
   );
 
-  return client.replyMessage(event.replyToken, flex);
+  const echo: TextMessage = { type: 'text', text: `https://liff.line.me/${CONCAT_ID}` };
+  return client.replyMessage(event.replyToken, [flex, echo]);
 }
 
 export { handleEvent };
