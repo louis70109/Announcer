@@ -85,12 +85,14 @@ npm run test
 
 - If you installed [act](https://github.com/nektos/act) locally, run `act` to check GitHub Actions status.
 
-# Expect
+# Expect enternce
 
 ![](https://github.com/louis70109/Announcer/blob/463868113c4710cdeca16a1a728fdc1fa7fb8ac9/readme_img/http_request.png)
 
+## API ➡️ `/liff/share`
+
+### Template 1
 ```javascript
-// query.template === '1'
 {
     template: '1',
     title: 'Title',
@@ -101,8 +103,11 @@ npm run test
     description: 'aaa\nbbb\nccc',
     activity: 'some tag',
 };
+```
 
-// query.template === '2'
+### Template 2
+
+```javascript
 staffList = {
   template: '2',
   title: 'title',
@@ -112,7 +117,11 @@ staffList = {
   map: 'Google Map link',
   people: [{name: 'NiJia', time: '10:00~12:00'}],
 };
-// query.template === '3'
+```
+
+### Template 3
+
+```javascript
 Card = {
   template: '2',
   title: 'title',
@@ -122,6 +131,9 @@ Card = {
   followUrl: 'HTTP link',
 };
 ```
+
+
+### Response 
 
 Above template would response following type:
 
