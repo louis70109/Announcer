@@ -85,7 +85,7 @@ npm run test
 
 - If you installed [act](https://github.com/nektos/act) locally, run `act` to check GitHub Actions status.
 
-# Expect enternce
+# Template Schema
 
 ![](https://github.com/louis70109/Announcer/blob/463868113c4710cdeca16a1a728fdc1fa7fb8ac9/readme_img/http_request.png)
 
