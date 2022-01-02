@@ -92,6 +92,9 @@ npm run test
 ## API ➡️ `/liff/share`
 
 ### Template 1
+
+![](https://github.com/louis70109/Announcer/blob/964d2edc539439a19ed425a9320b2dd9e5726420/readme_img/template1.png)
+
 ```javascript
 {
     template: '1',
@@ -107,6 +110,8 @@ npm run test
 
 ### Template 2
 
+![](https://github.com/louis70109/Announcer/blob/964d2edc539439a19ed425a9320b2dd9e5726420/readme_img/template2.png)
+
 ```javascript
 staffList = {
   template: '2',
@@ -120,6 +125,8 @@ staffList = {
 ```
 
 ### Template 3
+
+![](https://github.com/louis70109/Announcer/blob/964d2edc539439a19ed425a9320b2dd9e5726420/readme_img/template1.png)
 
 ```javascript
 Card = {
