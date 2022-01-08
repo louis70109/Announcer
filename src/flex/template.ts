@@ -1,12 +1,12 @@
-import { Card, FlexResponse, flexUrlTemplate, staffList } from '../../types/flexTemplate';
-import { activitySchedule, buildFlexContent, generateFlex, personalCard } from '../../utils/flex';
-import { Request } from 'express/index';
+import { Card, FlexResponse, flexUrlTemplate, News, staffList } from '../../types/flexTemplate'
+import { activitySchedule, buildFlexContent, generateFlex, personalCard, articleWithTags } from '../../utils/flex'
+import { Request } from 'express/index'
 
 export function flexController(req: Request): FlexResponse {
-  const query: any = req.query;
-  let flex: any = {};
-  console.log(query);
-  console.log(`Current template is: ${query.template}`);
+  const query: any = req.query
+  let flex: any = {}
+  console.log(query)
+  console.log(`Current template is: ${query.template}`)
   if (query.template === '1') {
     const flexQuery: flexUrlTemplate = {
       title: query.title,
@@ -16,8 +16,8 @@ export function flexController(req: Request): FlexResponse {
       imageUrl: query.imageUrl,
       description: query.desc,
       activity: query.activity,
-    };
-    flex = buildFlexContent(query.title, generateFlex(flexQuery));
+    }
+    flex = buildFlexContent(query.title, generateFlex(flexQuery))
   } else if (query.template === '2') {
     const staffQuery: staffList = {
       title: query.title,
@@ -26,8 +26,8 @@ export function flexController(req: Request): FlexResponse {
       activity: query.activity,
       map: query.map,
       people: query.people,
-    };
-    flex = buildFlexContent(query.title, activitySchedule(staffQuery));
+    }
+    flex = buildFlexContent(query.title, activitySchedule(staffQuery))
   } else if (query.template === '3') {
     const staffQuery: Card = {
       title: query.title,
@@ -35,11 +35,21 @@ export function flexController(req: Request): FlexResponse {
       avatar: query.avatar,
       back: query.back,
       followUrl: query.followUrl,
-    };
-    flex = buildFlexContent(query.title, personalCard(staffQuery));
-  } else flex = { type: 'text', text: 'Message' };
+    }
+    flex = buildFlexContent(query.title, personalCard(staffQuery))
+  } else if (query.template === '4') {
+    const newsQuery: News = {
+      image: query.image,
+      date: query.date,
+      description: query.description,
+      link: query.link,
+      tag: query.tag,
+      targetPicker: query.targetPicker,
+    }
+    flex = buildFlexContent(query.title, articleWithTags(newsQuery))
+  } else flex = { type: 'text', text: 'Message' }
 
   return {
     flex: JSON.stringify(flex),
-  };
+  }
 }

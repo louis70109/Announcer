@@ -42,4 +42,13 @@ type Card = {
   followUrl: string;
 };
 
-export { flexUrlTemplate, staffList, FlexResponse, Card, Hero };
+type News = {
+  image: string;
+  date: string;
+  description: string;
+  link: string;
+  tag: string;
+  targetPicker?: string;
+}
+
+export { flexUrlTemplate, staffList, FlexResponse, Card, Hero, News };

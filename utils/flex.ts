@@ -1,19 +1,19 @@
-import { FlexBox, FlexMessage } from '@line/bot-sdk/lib/types';
-import { gaScreenView } from './common';
-import { flexUrlTemplate, staffList, Card, Hero } from '../types/flexTemplate';
-import { FlexBubble, FlexComponent } from '@line/bot-sdk';
+import { FlexBox, FlexMessage } from '@line/bot-sdk/lib/types'
+import { gaScreenView } from './common'
+import { flexUrlTemplate, staffList, Card, Hero, News } from '../types/flexTemplate'
+import { FlexBubble, FlexComponent } from '@line/bot-sdk'
 
 function buildFlexContent(altText: string, contents: any): FlexMessage {
   return {
     type: 'flex',
     altText,
     contents,
-  };
+  }
 }
 
 function generateFlex(query: flexUrlTemplate): FlexBubble {
   let footerContents: FlexComponent[] = [],
-    header: any = {};
+    header: any = {}
   if (query.imageUrl) {
     const hero: Hero = {
       type: 'image',
@@ -21,8 +21,8 @@ function generateFlex(query: flexUrlTemplate): FlexBubble {
       size: 'full',
       aspectRatio: '16:9',
       aspectMode: 'cover',
-    };
-    header = { hero };
+    }
+    header = { hero }
   }
 
   if (query.url) {
@@ -35,7 +35,7 @@ function generateFlex(query: flexUrlTemplate): FlexBubble {
         label: '連結',
         uri: query.url,
       },
-    });
+    })
   }
 
   return {
@@ -159,19 +159,15 @@ function generateFlex(query: flexUrlTemplate): FlexBubble {
       contents: footerContents,
       flex: 0,
     },
-  };
+  }
 }
 
 function activitySchedule(query: staffList): FlexBubble {
   let people: FlexBox[] = [],
-    footerContents: FlexComponent[] = [];
+    footerContents: FlexComponent[] = []
 
   //Hard fix
-  if (
-    query.people &&
-    query.people[0].name !== '' &&
-    query.people[0].time !== ''
-  ) {
+  if (query.people && query.people[0].name !== '' && query.people[0].time !== '') {
     people = [
       {
         type: 'box',
@@ -186,10 +182,10 @@ function activitySchedule(query: staffList): FlexBubble {
           },
         ],
       },
-    ];
+    ]
 
     query.people.map((el) => {
-      if (!el.name && !el.time) return;
+      if (!el.name && !el.time) return
       people.push({
         type: 'box',
         layout: 'horizontal',
@@ -209,8 +205,8 @@ function activitySchedule(query: staffList): FlexBubble {
             align: 'end',
           },
         ],
-      });
-    });
+      })
+    })
   }
   if (query.url) {
     // Avoid uri got multi-value
@@ -223,7 +219,7 @@ function activitySchedule(query: staffList): FlexBubble {
         label: '參考連結',
         uri: query.url,
       },
-    });
+    })
   }
   if (query.map) {
     footerContents.push({
@@ -233,7 +229,7 @@ function activitySchedule(query: staffList): FlexBubble {
         label: '地圖',
         uri: query.map,
       },
-    });
+    })
   }
 
   return {
@@ -284,13 +280,13 @@ function activitySchedule(query: staffList): FlexBubble {
       contents: footerContents,
       flex: 0,
     },
-  };
+  }
 }
 
 function personalCard(person: Card): FlexBubble {
   const back = person.back,
     avatar = person.avatar,
-    followUrl = person.followUrl;
+    followUrl = person.followUrl
   return {
     type: 'bubble',
     header: {
@@ -397,7 +393,163 @@ function personalCard(person: Card): FlexBubble {
       ],
       paddingTop: '10px',
     },
-  };
+  }
 }
 
-export { buildFlexContent, generateFlex, activitySchedule, personalCard };
+function articleWithTags(news: News): FlexBubble {
+  let contents: any = [
+    {
+      type: 'image',
+      url: news.image,
+      size: 'full',
+      aspectMode: 'cover',
+      aspectRatio: '2:3',
+      gravity: 'top',
+    },
+    {
+      type: 'box',
+      layout: 'vertical',
+      contents: [
+        {
+          type: 'box',
+          layout: 'vertical',
+          contents: [
+            {
+              type: 'text',
+              text: news.date,
+              size: 'xl',
+              color: '#ffffff',
+              weight: 'bold',
+            },
+          ],
+        },
+        {
+          type: 'box',
+          layout: 'baseline',
+          contents: [
+            {
+              type: 'text',
+              text: news.description,
+              color: '#ebebeb',
+              size: 'sm',
+              flex: 0,
+              wrap: true,
+            },
+          ],
+          spacing: 'lg',
+        },
+        {
+          type: 'box',
+          layout: 'vertical',
+          contents: [
+            {
+              type: 'filler',
+            },
+            {
+              type: 'box',
+              layout: 'baseline',
+              contents: [
+                {
+                  type: 'filler',
+                },
+                {
+                  type: 'text',
+                  text: '連結',
+                  color: '#ffffff',
+                  flex: 0,
+                  offsetTop: '-2px',
+                },
+                {
+                  type: 'filler',
+                },
+              ],
+              spacing: 'sm',
+              action: {
+                type: 'uri',
+                label: '連結',
+                uri: news.link,
+              },
+            },
+            {
+              type: 'filler',
+            },
+          ],
+          borderWidth: '1px',
+          cornerRadius: '4px',
+          spacing: 'sm',
+          borderColor: '#ffffff',
+          margin: 'xxl',
+          height: '40px',
+        },
+      ],
+      position: 'absolute',
+      offsetBottom: '0px',
+      offsetStart: '0px',
+      offsetEnd: '0px',
+      backgroundColor: '#03303Acc',
+      paddingAll: '20px',
+      paddingTop: '18px',
+    },
+    {
+      type: 'box',
+      layout: 'vertical',
+      contents: [
+        {
+          type: 'text',
+          text: news.tag,
+          color: '#ffffff',
+          align: 'center',
+          size: 'xs',
+          offsetTop: '3px',
+          wrap: true,
+        },
+      ],
+      position: 'absolute',
+      cornerRadius: '20px',
+      offsetTop: '18px',
+      backgroundColor: '#ff334b',
+      offsetStart: '18px',
+      height: '25px',
+      width: '100px',
+    },
+  ]
+  if (news.targetPicker) {
+    contents.push({
+      type: 'box',
+      layout: 'vertical',
+      contents: [
+        {
+          type: 'text',
+          text: '＃點我分享',
+          align: 'center',
+          size: 'xs',
+          offsetTop: '3px',
+          wrap: true,
+        },
+      ],
+      position: 'absolute',
+      cornerRadius: '20px',
+      offsetTop: '18px',
+      backgroundColor: '#a6ed8e',
+      height: '25px',
+      width: '100px',
+      offsetEnd: '18px',
+      action: {
+        type: 'uri',
+        label: 'action',
+        uri: news.targetPicker,
+      },
+    })
+  }
+
+  return {
+    type: 'bubble',
+    body: {
+      type: 'box',
+      layout: 'vertical',
+      contents,
+      paddingAll: '0px',
+    },
+  }
+}
+export { buildFlexContent, generateFlex, activitySchedule, personalCard, articleWithTags }
