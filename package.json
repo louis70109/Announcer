@@ -5,10 +5,11 @@
   "main": "index.ts",
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./dist/index.js",
-    "dev": "nodemon index.ts",
+    "dev": "export NODE_ENV=develop && nodemon index.ts",
     "build": "tsc",
     "heroku-postbuild": "npm run build",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "test:local": "export NODE_ENV=develop && jest --coverage"
   },
   "repository": {
     "type": "git",
