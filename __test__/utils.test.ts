@@ -1,52 +1,47 @@
-import { buildCarouselContent } from '../utils/common';
-import {
-  activitySchedule,
-  buildFlexContent,
-  generateFlex,
-  personalCard,
-} from '../utils/flex';
-import { FlexCarousel, FlexMessage } from '@line/bot-sdk/dist/types';
-import { Card, flexUrlTemplate, staffList } from '../types/flexTemplate';
-import { FlexBubble } from '@line/bot-sdk/lib/types';
-const OLD_ENV = process.env;
+import { buildCarouselContent } from '../utils/common'
+import { activitySchedule, articleWithTags, buildFlexContent, generateFlex, personalCard } from '../utils/flex'
+import { FlexCarousel, FlexMessage } from '@line/bot-sdk/dist/types'
+import { Card, flexUrlTemplate, News, staffList } from '../types/flexTemplate'
+import { FlexBubble } from '@line/bot-sdk/lib/types'
+const OLD_ENV = process.env
 beforeEach(() => {
-  jest.resetModules(); // most important - it clears the cache
-  process.env = { ...OLD_ENV }; // make a copy
-});
+  jest.resetModules() // most important - it clears the cache
+  process.env = { ...OLD_ENV } // make a copy
+})
 
 afterAll(() => {
-  process.env = OLD_ENV; // restore old env
-});
+  process.env = OLD_ENV // restore old env
+})
 
 function compareTwoDictionary(one: any, two: any) {
   const dictOne = JSON.stringify(one),
-    dictTwo = JSON.stringify(two);
-  expect(dictOne).toBe(dictTwo);
+    dictTwo = JSON.stringify(two)
+  expect(dictOne).toBe(dictTwo)
 }
 
 test('It would build Carousel content', () => {
-  let carousel: FlexCarousel = buildCarouselContent([{ type: 'bubble' }]);
+  let carousel: FlexCarousel = buildCarouselContent([{ type: 'bubble' }])
 
   const expected: FlexCarousel = {
     type: 'carousel',
     contents: [{ type: 'bubble' }],
-  };
-  compareTwoDictionary(expected, carousel);
-});
+  }
+  compareTwoDictionary(expected, carousel)
+})
 
 test('It would build FlexMessage content', () => {
-  let carousel: FlexMessage = buildFlexContent('alt text', { type: 'bubble' });
+  let carousel: FlexMessage = buildFlexContent('alt text', { type: 'bubble' })
 
   const expected: FlexMessage = {
     type: 'flex',
     altText: 'alt text',
     contents: { type: 'bubble' },
-  };
-  compareTwoDictionary(expected, carousel);
-});
+  }
+  compareTwoDictionary(expected, carousel)
+})
 
 test('It should be activity flex message(fully params)', () => {
-  process.env.GA = 'UA-123456789-0';
+  process.env.GA = 'UA-123456789-0'
   const query: flexUrlTemplate = {
     title: 'I am title',
     place: '@10-4',
@@ -55,9 +50,9 @@ test('It should be activity flex message(fully params)', () => {
     imageUrl: 'https://i.imgur.com/EI8AuUY.jpg',
     description: 'description',
     activity: '活動',
-  };
+  }
 
-  const flex: FlexMessage = buildFlexContent('I am title', generateFlex(query));
+  const flex: FlexMessage = buildFlexContent('I am title', generateFlex(query))
   const expected: any = {
     type: 'flex',
     altText: 'I am title',
@@ -72,8 +67,7 @@ test('It should be activity flex message(fully params)', () => {
         contents: [
           {
             type: 'image',
-            url:
-              'https://www.google-analytics.com/collect?an=My%20App&cd=I%20am%20title&cid=Ud6ab0000000000000000000baffb8ac&ds=app&t=screenview&tid=UA-123456789-0&uid=Ud6ab0000000000000000000baffb8ac&ul=zh-tw&v=1',
+            url: 'https://www.google-analytics.com/collect?an=My%20App&cd=I%20am%20title&cid=Ud6ab0000000000000000000baffb8ac&ds=app&t=screenview&tid=UA-123456789-0&uid=Ud6ab0000000000000000000baffb8ac&ul=zh-tw&v=1',
             aspectRatio: '1:1',
             size: 'full',
             aspectMode: 'cover',
@@ -201,21 +195,19 @@ test('It should be activity flex message(fully params)', () => {
         flex: 0,
       },
     },
-  };
-  compareTwoDictionary(expected, flex);
-});
+  }
+  compareTwoDictionary(expected, flex)
+})
 
 test('It should be personal card(fully params)', () => {
   const person: Card = {
     title: 'NiJia(testing)',
     description: 'Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem ',
-    back:
-      'https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip12.jpg',
+    back: 'https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip12.jpg',
     followUrl: 'https://developers.line.biz/en/news/',
-    avatar:
-      'https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png',
-  };
-  const flex: FlexBubble = personalCard(person);
+    avatar: 'https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png',
+  }
+  const flex: FlexBubble = personalCard(person)
   const expected: any = {
     type: 'bubble',
     header: {
@@ -224,8 +216,7 @@ test('It should be personal card(fully params)', () => {
       contents: [
         {
           type: 'image',
-          url:
-            'https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip12.jpg',
+          url: 'https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip12.jpg',
           size: 'full',
           aspectRatio: '20:13',
           aspectMode: 'cover',
@@ -275,8 +266,7 @@ test('It should be personal card(fully params)', () => {
                   contents: [
                     {
                       type: 'image',
-                      url:
-                        'https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png',
+                      url: 'https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png',
                       aspectMode: 'cover',
                       size: 'full',
                     },
@@ -315,9 +305,9 @@ test('It should be personal card(fully params)', () => {
       ],
       paddingTop: '10px',
     },
-  };
-  compareTwoDictionary(expected, flex);
-});
+  }
+  compareTwoDictionary(expected, flex)
+})
 
 test('It should be fully params activitySchedule function', () => {
   const staffQuery: staffList = {
@@ -330,8 +320,8 @@ test('It should be fully params activitySchedule function', () => {
       { name: 'Moon', time: '10:00~12:00' },
       { name: 'Boss', time: '11:00~12:00' },
     ],
-  };
-  const flex: FlexBubble = activitySchedule(staffQuery);
+  }
+  const flex: FlexBubble = activitySchedule(staffQuery)
   const expected: any = {
     type: 'bubble',
     body: {
@@ -450,17 +440,17 @@ test('It should be fully params activitySchedule function', () => {
       ],
       flex: 0,
     },
-  };
-  compareTwoDictionary(expected, flex);
-});
+  }
+  compareTwoDictionary(expected, flex)
+})
 
 test('It should be activity schedule function but 名單, 參考連結 and 地圖 are empty', () => {
   const staffQuery: staffList = {
     title: '10/10 Title',
     place: '台北市內湖區瑞光路',
     activity: '參與名單',
-  };
-  const flex: FlexBubble = activitySchedule(staffQuery);
+  }
+  const flex: FlexBubble = activitySchedule(staffQuery)
   const expected: any = {
     type: 'bubble',
     body: {
@@ -506,6 +496,172 @@ test('It should be activity schedule function but 名單, 參考連結 and 地�
       contents: [],
       flex: 0,
     },
-  };
-  compareTwoDictionary(expected, flex);
-});
+  }
+  compareTwoDictionary(expected, flex)
+})
+
+test('It should be two TAGs article flex', () => {
+  const newsQuery: News = {
+    image: 'https://nijialin.com/images/2021/internal_hack/zoom.jpg',
+    date: '2022-01-01',
+    description: '外援全部都到齊啦，其他球隊怎麼打',
+    link: 'https://github.com/louis70109',
+    tag: '#就是想分享',
+    targetPicker: 'https://nijialin.com',
+  }
+  const flex: FlexBubble = articleWithTags(newsQuery)
+  const expected: any = {
+    type: 'bubble',
+    body: {
+      type: 'box',
+      layout: 'vertical',
+      contents: [
+        { type: 'image', url: 'https://nijialin.com/images/2021/internal_hack/zoom.jpg', size: 'full', aspectMode: 'cover', aspectRatio: '2:3', gravity: 'top' },
+        {
+          type: 'box',
+          layout: 'vertical',
+          contents: [
+            { type: 'box', layout: 'vertical', contents: [{ type: 'text', text: '2022-01-01', size: 'xl', color: '#ffffff', weight: 'bold' }] },
+            {
+              type: 'box',
+              layout: 'baseline',
+              contents: [{ type: 'text', text: '外援全部都到齊啦，其他球隊怎麼打', color: '#ebebeb', size: 'sm', flex: 0, wrap: true }],
+              spacing: 'lg',
+            },
+            {
+              type: 'box',
+              layout: 'vertical',
+              contents: [
+                { type: 'filler' },
+                {
+                  type: 'box',
+                  layout: 'baseline',
+                  contents: [{ type: 'filler' }, { type: 'text', text: '連結', color: '#ffffff', flex: 0, offsetTop: '-2px' }, { type: 'filler' }],
+                  spacing: 'sm',
+                  action: { type: 'uri', label: '連結', uri: 'https://github.com/louis70109' },
+                },
+                { type: 'filler' },
+              ],
+              borderWidth: '1px',
+              cornerRadius: '4px',
+              spacing: 'sm',
+              borderColor: '#ffffff',
+              margin: 'xxl',
+              height: '40px',
+            },
+          ],
+          position: 'absolute',
+          offsetBottom: '0px',
+          offsetStart: '0px',
+          offsetEnd: '0px',
+          backgroundColor: '#03303Acc',
+          paddingAll: '20px',
+          paddingTop: '18px',
+        },
+        {
+          type: 'box',
+          layout: 'vertical',
+          contents: [{ type: 'text', text: '#就是想分享', color: '#ffffff', align: 'center', size: 'xs', offsetTop: '3px', wrap: true }],
+          position: 'absolute',
+          cornerRadius: '20px',
+          offsetTop: '18px',
+          backgroundColor: '#ff334b',
+          offsetStart: '18px',
+          height: '25px',
+          width: '100px',
+        },
+        {
+          type: 'box',
+          layout: 'vertical',
+          contents: [{ type: 'text', text: '＃點我分享', align: 'center', size: 'xs', offsetTop: '3px', wrap: true }],
+          position: 'absolute',
+          cornerRadius: '20px',
+          offsetTop: '18px',
+          backgroundColor: '#a6ed8e',
+          height: '25px',
+          width: '100px',
+          offsetEnd: '18px',
+          action: { type: 'uri', label: 'action', uri: 'https://nijialin.com' },
+        },
+      ],
+      paddingAll: '0px',
+    },
+  }
+  compareTwoDictionary(expected, flex)
+})
+
+test('It should be only one TAG article flex', () => {
+  const newsQuery: News = {
+    image: 'https://nijialin.com/images/2021/internal_hack/zoom.jpg',
+    date: '2022-01-01',
+    description: '外援全部都到齊啦，其他球隊怎麼打',
+    link: 'https://github.com/louis70109',
+    tag: '#就是想分享',
+  }
+  const flex: FlexBubble = articleWithTags(newsQuery)
+  const expected: any = {
+    type: 'bubble',
+    body: {
+      type: 'box',
+      layout: 'vertical',
+      contents: [
+        { type: 'image', url: 'https://nijialin.com/images/2021/internal_hack/zoom.jpg', size: 'full', aspectMode: 'cover', aspectRatio: '2:3', gravity: 'top' },
+        {
+          type: 'box',
+          layout: 'vertical',
+          contents: [
+            { type: 'box', layout: 'vertical', contents: [{ type: 'text', text: '2022-01-01', size: 'xl', color: '#ffffff', weight: 'bold' }] },
+            {
+              type: 'box',
+              layout: 'baseline',
+              contents: [{ type: 'text', text: '外援全部都到齊啦，其他球隊怎麼打', color: '#ebebeb', size: 'sm', flex: 0, wrap: true }],
+              spacing: 'lg',
+            },
+            {
+              type: 'box',
+              layout: 'vertical',
+              contents: [
+                { type: 'filler' },
+                {
+                  type: 'box',
+                  layout: 'baseline',
+                  contents: [{ type: 'filler' }, { type: 'text', text: '連結', color: '#ffffff', flex: 0, offsetTop: '-2px' }, { type: 'filler' }],
+                  spacing: 'sm',
+                  action: { type: 'uri', label: '連結', uri: 'https://github.com/louis70109' },
+                },
+                { type: 'filler' },
+              ],
+              borderWidth: '1px',
+              cornerRadius: '4px',
+              spacing: 'sm',
+              borderColor: '#ffffff',
+              margin: 'xxl',
+              height: '40px',
+            },
+          ],
+          position: 'absolute',
+          offsetBottom: '0px',
+          offsetStart: '0px',
+          offsetEnd: '0px',
+          backgroundColor: '#03303Acc',
+          paddingAll: '20px',
+          paddingTop: '18px',
+        },
+        {
+          type: 'box',
+          layout: 'vertical',
+          contents: [{ type: 'text', text: '#就是想分享', color: '#ffffff', align: 'center', size: 'xs', offsetTop: '3px', wrap: true }],
+          position: 'absolute',
+          cornerRadius: '20px',
+          offsetTop: '18px',
+          backgroundColor: '#ff334b',
+          offsetStart: '18px',
+          height: '25px',
+          width: '100px',
+        },
+      ],
+      paddingAll: '0px',
+    },
+  }
+  compareTwoDictionary(expected, flex)
+})
