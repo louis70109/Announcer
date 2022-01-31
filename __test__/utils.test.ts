@@ -6,7 +6,9 @@ import { FlexBubble } from '@line/bot-sdk/lib/types'
 const OLD_ENV = process.env
 beforeEach(() => {
   jest.resetModules() // most important - it clears the cache
-  process.env = { ...OLD_ENV } // make a copy
+  process.env = { ...OLD_ENV,
+    GA: 'UA-123456789-0'
+  } // make a copy
 })
 
 afterAll(() => {
@@ -324,6 +326,22 @@ test('It should be fully params activitySchedule function', () => {
   const flex: FlexBubble = activitySchedule(staffQuery)
   const expected: any = {
     type: 'bubble',
+    header: {
+      type: 'box',
+      layout: 'vertical',
+      width: '1px',
+      height: '1px',
+      paddingAll: '0px',
+      contents: [
+        {
+          type: 'image',
+          url: 'https://www.google-analytics.com/collect?an=My%20App&cd=10%2F10%20Title&cid=Ud6ab0000000000000000000baffb8ac&ds=app&t=screenview&tid=UA-123456789-0&uid=Ud6ab0000000000000000000baffb8ac&ul=zh-tw&v=1',
+          aspectRatio: '1:1',
+          size: 'full',
+          aspectMode: 'cover',
+        },
+      ],
+    },
     body: {
       type: 'box',
       layout: 'vertical',
@@ -453,6 +471,22 @@ test('It should be activity schedule function but 名單, 參考連結 and 地�
   const flex: FlexBubble = activitySchedule(staffQuery)
   const expected: any = {
     type: 'bubble',
+    header: {
+      type: 'box',
+      layout: 'vertical',
+      width: '1px',
+      height: '1px',
+      paddingAll: '0px',
+      contents: [
+        {
+          type: 'image',
+          url: 'https://www.google-analytics.com/collect?an=My%20App&cd=10%2F10%20Title&cid=Ud6ab0000000000000000000baffb8ac&ds=app&t=screenview&tid=UA-123456789-0&uid=Ud6ab0000000000000000000baffb8ac&ul=zh-tw&v=1',
+          aspectRatio: '1:1',
+          size: 'full',
+          aspectMode: 'cover',
+        },
+      ],
+    },
     body: {
       type: 'box',
       layout: 'vertical',
@@ -512,6 +546,22 @@ test('It should be two TAGs article flex', () => {
   const flex: FlexBubble = articleWithTags(newsQuery)
   const expected: any = {
     type: 'bubble',
+    header: {
+      type: 'box',
+      layout: 'vertical',
+      width: '1px',
+      height: '1px',
+      paddingAll: '0px',
+      contents: [
+        {
+          type: 'image',
+          url: 'https://www.google-analytics.com/collect?an=My%20App&cd=2022-01-01&cid=Ud6ab0000000000000000000baffb8ac&ds=app&t=screenview&tid=UA-123456789-0&uid=Ud6ab0000000000000000000baffb8ac&ul=zh-tw&v=1',
+          aspectRatio: '1:1',
+          size: 'full',
+          aspectMode: 'cover',
+        },
+      ],
+    },
     body: {
       type: 'box',
       layout: 'vertical',
@@ -601,6 +651,22 @@ test('It should be only one TAG article flex', () => {
   const flex: FlexBubble = articleWithTags(newsQuery)
   const expected: any = {
     type: 'bubble',
+    header: {
+      type: 'box',
+      layout: 'vertical',
+      width: '1px',
+      height: '1px',
+      paddingAll: '0px',
+      contents: [
+        {
+          type: 'image',
+          url: 'https://www.google-analytics.com/collect?an=My%20App&cd=2022-01-01&cid=Ud6ab0000000000000000000baffb8ac&ds=app&t=screenview&tid=UA-123456789-0&uid=Ud6ab0000000000000000000baffb8ac&ul=zh-tw&v=1',
+          aspectRatio: '1:1',
+          size: 'full',
+          aspectMode: 'cover',
+        },
+      ],
+    },
     body: {
       type: 'box',
       layout: 'vertical',

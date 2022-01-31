@@ -296,7 +296,7 @@ function personalCard(person: Card): FlexBubble {
     followUrl = person.followUrl
   return {
     type: 'bubble',
-    ...addGA_InFlexHeader(person.title),
+    // ...addGA_InFlexHeader(person.title), need to merge both of GA and original header
     header: {
       type: 'box',
       layout: 'vertical',
