@@ -32,3 +32,15 @@ jobs:
         run: |
            npm install
            npm run test
+      - name: send deploy success message
+        if: ${{ success() }}
+        uses: louis70109/line-notify-action@master
+        with:
+          token: ${{ secrets.LINE_NOTIFY_TOKEN }}
+          message: '✅  Announcer 測試過啦，Heroku go!'
+      - name: send failure message
+        if: ${{ failure() }}
+        uses: louis70109/line-notify-action@master
+        with:
+          token: ${{ secrets.LINE_NOTIFY_TOKEN }}
+          message: '🔥 Announcer 炸了. Check Action: https://github.com/louis70109/Announcer/actions'
