@@ -11,9 +11,30 @@ function buildFlexContent(altText: string, contents: any): FlexMessage {
   }
 }
 
+function addGA_InFlexHeader(flexName: string): any {
+  return {
+    header: {
+      type: 'box',
+      layout: 'vertical',
+      width: '1px',
+      height: '1px',
+      paddingAll: '0px',
+      contents: [
+        {
+          type: 'image',
+          url: gaScreenView(flexName),
+          aspectRatio: '1:1',
+          size: 'full',
+          aspectMode: 'cover',
+        },
+      ],
+    },
+  }
+}
+
 function generateFlex(query: flexUrlTemplate): FlexBubble {
   let footerContents: FlexComponent[] = [],
-    header: any = {}
+    heroFlex: any = {}
   if (query.imageUrl) {
     const hero: Hero = {
       type: 'image',
@@ -22,7 +43,7 @@ function generateFlex(query: flexUrlTemplate): FlexBubble {
       aspectRatio: '16:9',
       aspectMode: 'cover',
     }
-    header = { hero }
+    heroFlex = { hero }
   }
 
   if (query.url) {
@@ -40,23 +61,8 @@ function generateFlex(query: flexUrlTemplate): FlexBubble {
 
   return {
     type: 'bubble',
-    header: {
-      type: 'box',
-      layout: 'vertical',
-      width: '1px',
-      height: '1px',
-      paddingAll: '0px',
-      contents: [
-        {
-          type: 'image',
-          url: gaScreenView(query.title),
-          aspectRatio: '1:1',
-          size: 'full',
-          aspectMode: 'cover',
-        },
-      ],
-    },
-    ...(header ? header : undefined),
+    ...addGA_InFlexHeader(query.title),
+    ...(heroFlex ? heroFlex : undefined),
     body: {
       type: 'box',
       layout: 'vertical',
