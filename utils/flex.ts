@@ -240,6 +240,7 @@ function activitySchedule(query: staffList): FlexBubble {
 
   return {
     type: 'bubble',
+    ...addGA_InFlexHeader(query.title),
     body: {
       type: 'box',
       layout: 'vertical',
@@ -295,6 +296,7 @@ function personalCard(person: Card): FlexBubble {
     followUrl = person.followUrl
   return {
     type: 'bubble',
+    ...addGA_InFlexHeader(person.title),
     header: {
       type: 'box',
       layout: 'vertical',
@@ -550,6 +552,7 @@ function articleWithTags(news: News): FlexBubble {
 
   return {
     type: 'bubble',
+    ...addGA_InFlexHeader(news.date),
     body: {
       type: 'box',
       layout: 'vertical',
