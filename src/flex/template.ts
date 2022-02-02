@@ -53,8 +53,9 @@ export function flexController(req: Request): FlexResponse {
     log.info(newsQuery)
     flex = buildFlexContent(query.title, articleWithTags(newsQuery))
   } else {
-    flex = { type: 'text', text: 'Message' }
-}
+    flex = { type: 'text', text: 'Template not found.' }
+    log.info('Template not found.')
+  }
 
   return {
     flex: JSON.stringify(flex),
