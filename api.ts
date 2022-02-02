@@ -8,8 +8,13 @@ import { MiddlewareConfig } from '@line/bot-sdk/lib/types'
 import { flexController } from './src/flex/template'
 import cors from 'cors'
 import { FlexResponse } from './types/flexTemplate'
+import log from 'loglevel'
 
-const { CHANNEL_SECRET, CHANNEL_ACCESS_TOKEN, CONCAT_ID } = process.env
+const { CHANNEL_SECRET, CHANNEL_ACCESS_TOKEN, CONCAT_ID, LOGGING } = process.env
+
+if (LOGGING === 'true') log.setLevel('info')
+else log.setDefaultLevel('warn')
+
 const lineConfig: MiddlewareConfig = {
   channelAccessToken: CHANNEL_ACCESS_TOKEN || '',
   channelSecret: CHANNEL_SECRET || '',

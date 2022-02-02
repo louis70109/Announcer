@@ -13,11 +13,12 @@ const { CONCAT_ID } = process.env
 function handleEvent(event: any) {
   if (event.source.userId === 'Udeadbeefdeadbeefdeadbeefdeadbeef') return // webhook verify
 
+  let targetPickerLiffUrl = `https://liff.line.me/${CONCAT_ID}/?`
   const flexQuery: flexUrlTemplate = {
     title: 'I am title',
     place: '@10-4',
     time: '10:30~11:00',
-    url: `https://liff.line.me/${CONCAT_ID}/?template=1`,
+    url: targetPickerLiffUrl + 'template=1',
     imageUrl: 'https://i.imgur.com/EI8AuUY.jpg',
     description: 'description',
     activity: '活動',
@@ -25,8 +26,8 @@ function handleEvent(event: any) {
   const staffQuery: staffList = {
     title: '10/10 Title',
     place: '台北市內湖區瑞光路',
-    map: `https://liff.line.me/${CONCAT_ID}/?template=2`,
-    url: `https://liff.line.me/${CONCAT_ID}/?template=2`,
+    map: targetPickerLiffUrl + 'template=2',
+    url: targetPickerLiffUrl + 'template=2',
     activity: '參與名單',
     people: [
       { name: 'Moon', time: '10:00~12:00' },
@@ -36,7 +37,7 @@ function handleEvent(event: any) {
   const person: Card = {
     title: 'NiJia(testing)',
     description: 'Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem ',
-    followUrl: `https://liff.line.me/${CONCAT_ID}/?template=3`,
+    followUrl: targetPickerLiffUrl + 'template=3',
     back: 'https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip12.jpg',
     avatar: 'https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png',
   }
@@ -44,9 +45,9 @@ function handleEvent(event: any) {
     image: 'https://nijialin.com/images/2021/internal_hack/zoom.jpg',
     date: '2022-01-01',
     description: '外援全部都到齊啦，其他球隊怎麼打',
-    link: 'https://github.com/louis70109',
+    link: targetPickerLiffUrl + 'template=4',
     tag: '#就是想分享',
-    targetPicker: 'https://nijialin.com',
+    targetPicker: targetPickerLiffUrl + 'template=4',
   }
   const flex: FlexMessage = buildFlexContent('測試樣板', buildCarouselContent([generateFlex(flexQuery), activitySchedule(staffQuery), personalCard(person)])),
     flex2: FlexMessage = buildFlexContent(
@@ -57,13 +58,13 @@ function handleEvent(event: any) {
           image: 'https://nijialin.com/images/2021/internal_hack/zoom.jpg',
           date: '2022-01-01',
           description: '外援全部都到齊啦，其他球隊怎麼打',
-          link: 'https://github.com/louis70109',
+          link: targetPickerLiffUrl + 'template=4',
           tag: '#就是想分享',
         }),
       ])
     )
 
-  const echo: TextMessage = { type: 'text', text: `https://liff.line.me/${CONCAT_ID}` }
+  const echo: TextMessage = { type: 'text', text: targetPickerLiffUrl }
   return client.replyMessage(event.replyToken, [flex, flex2, echo])
 }
 
