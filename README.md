@@ -66,13 +66,40 @@ npx ngrok http 5000
 
 ## 3. Copy url to Messaging API and LIFF endpoint url.
 
+### LINE Bot
+
+You can go to LINE Developer Console to change LINE Bot webhook url.
+
+If you used `channel_access_toen` and `channel_secret` in `.env` file.
+
+You can use `change_bot_url.sh` to change temp webhook url.
+
+```sh
+sh change_bot_url.sh 57G...YOUR_ACCESS_TOKEN...vw= https://{YOUR_DOMAIN}/webhooks/line
+```
+
+will see following log:
+
+```
+--------------------------
+
+{}
+
+--------------------------
+
+{"endpoint":"https://{YOUR_DOMAIN}/webhooks/line","active":true}
+-------------------------
+```
+
+- `{}`: if empty, means success.
+
 ## 4. Use following command before deploy:
 
 ```
-npm run build
+npm run dev
 ```
 
-> This command will compile typescript to javascript file in `dist/`.
+> This command will compile TypeScript to JavaScript file in `dist/`.
 
 
 ## 5. Local Unit/Integration Test
@@ -91,12 +118,12 @@ npm run test
 
 ## API ➡️ `/liff/share`
 
-### Template 1
+### Template 1 - Announcement
 
 ![](https://github.com/louis70109/Announcer/blob/964d2edc539439a19ed425a9320b2dd9e5726420/readme_img/template1.png)
 
-```javascript
-{
+```typescript
+type announcement = {
     template: '1',
     title: 'Title',
     place: 'location',
@@ -108,12 +135,12 @@ npm run test
 };
 ```
 
-### Template 2
+### Template 2 - Staff List
 
 ![](https://github.com/louis70109/Announcer/blob/964d2edc539439a19ed425a9320b2dd9e5726420/readme_img/template2.png)
 
-```javascript
-staffList = {
+```typescript
+type staffList = {
   template: '2',
   title: 'title',
   place: 'here',
@@ -124,12 +151,12 @@ staffList = {
 };
 ```
 
-### Template 3
+### Template 3 - Card
 
 ![](https://github.com/louis70109/Announcer/blob/964d2edc539439a19ed425a9320b2dd9e5726420/readme_img/template1.png)
 
-```javascript
-Card = {
+```typescript
+type Card = {
   template: '2',
   title: 'title',
   description: 'aaa\nbbb',
@@ -139,6 +166,20 @@ Card = {
 };
 ```
 
+### Template 4 - News
+
+![](https://github.com/louis70109/Announcer/blob/964d2edc539439a19ed425a9320b2dd9e5726420/readme_img/template4.png)
+
+```typescript
+type News = {
+  image: string;
+  date: string;
+  description: string;
+  link: string;
+  tag: string;
+  targetPicker?: string;
+}
+```
 
 ### Response 
 
