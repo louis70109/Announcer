@@ -168,7 +168,7 @@ type Card = {
 
 ### Template 4 - News
 
-![](https://github.com/louis70109/Announcer/blob/964d2edc539439a19ed425a9320b2dd9e5726420/readme_img/template4.png)
+![](https://github.com/louis70109/Announcer/blob/9bafd8467113900b2798431163b2954a7337ddfa/readme_img/template4.png)
 
 ```typescript
 type News = {
