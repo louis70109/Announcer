@@ -13,7 +13,7 @@ const { CONCAT_ID } = process.env
 function handleEvent(event: any) {
   if (event.source.userId === 'Udeadbeefdeadbeefdeadbeefdeadbeef') return // webhook verify
 
-  let targetPickerLiffUrl = `https://liff.line.me/${CONCAT_ID}/?`
+  let targetPickerLiffUrl = `https://liff.line.me/${CONCAT_ID}?`
   const flexQuery: flexUrlTemplate = {
     title: 'I am title',
     place: '@10-4',
